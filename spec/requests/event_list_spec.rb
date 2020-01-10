@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Event List', :type => :request do
-  let (:headers) { { 'Content-Type': 'application/json' } }
+  let (:headers) { { 'Content-Type': 'application/vnd.api+json' } }
 
   before(:all) do
     @created_events = {}
