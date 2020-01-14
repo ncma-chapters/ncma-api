@@ -3,5 +3,5 @@ class Event < ApplicationRecord
 
   validates :name, presence: true
 
-  has_one :venue
+  belongs_to :venue, optional: true
 end
