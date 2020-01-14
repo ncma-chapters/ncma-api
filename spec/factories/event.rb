@@ -18,7 +18,7 @@ FactoryBot.define do
     factory :published_future_event do
       published_at { DateTime.now - 5.days } # published 5 days ago
       starting_at { DateTime.now + 10.days } # events is 10 days away
-      ending_at { DateTime.now + 10.days + 2.hours } # events is 10 days away
+      ending_at { DateTime.now + 10.days + 2.hours }
     end
 
     factory :published_past_event do
@@ -51,6 +51,13 @@ FactoryBot.define do
       deleted_at { DateTime.now - 15.days }
       starting_at { DateTime.now + 10.days }
       ending_at { DateTime.now + 10.days + 2.hours }
+    end
+
+    factory :published_future_event_with_venue do
+      published_at { DateTime.now - 2.days }
+      starting_at { DateTime.now + 14.days }
+      ending_at { DateTime.now + 14.days + 8.hours }
+      venue
     end
   end
 end
