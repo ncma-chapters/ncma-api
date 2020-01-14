@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Event List', :type => :request do
-  let (:headers) { { 'Content-Type': 'application/vnd.api+json' } }
+  let (:headers) { { Accept: 'application/vnd.api+json', 'Content-Type': 'application/vnd.api+json' } }
 
   before(:all) do
     @created_events = {}
@@ -28,7 +28,7 @@ RSpec.describe 'Event List', :type => :request do
   end
 
   describe 'GET /events' do
-    it 'returns a list of non-deleted, published events' do
+    it 'returns a list of non-deleted, published events by default' do
       get '/events', headers: headers
 
       # TODO abstract to: behaves_like 'successful get request'
@@ -56,9 +56,6 @@ RSpec.describe 'Event List', :type => :request do
       expect(event_1['attributes']['publishedAt']).to eq(expected_event_1.published_at.iso8601(3))
       expect(event_1['attributes']['deletedAt']).to eq(nil)
       expect(event_1['attributes']['venueId']).to eq(nil)
-      # # TODO: computed properties
-      # expect(event_1.start).to eq({ })
-      # expect(event_1.end).to eq({ })
 
       expect(event_2['id']).to be_present
       expect(event_2['type']).to eq('events')
@@ -69,24 +66,43 @@ RSpec.describe 'Event List', :type => :request do
       expect(event_2['attributes']['publishedAt']).to eq(expected_event_2.published_at.iso8601(3))
       expect(event_2['attributes']['deletedAt']).to eq(nil)
       expect(event_2['attributes']['venueId']).to eq(nil)
-      # # TODO: computed properties
-      # expect(event_2.start).to eq({ })
-      # expect(event_2.end).to eq({ })
-    end
-
-    xit 'can filter list to only future events' do
-      # TODO abstract to: behaves_like 'successful get request'
-      expect(response).to have_http_status(:success)
-      expect(response.content_type).to eq('application/vnd.api+json')
-
-      res_body = JSON(response.body)
-
-      expect(res_body['data']).to be_an_instance_of(Array)
-      expect(res_body['data'].count).to eq(1)
     end
 
     xit 'can include the venue' do
 
+    end
+
+    xit 'can include the ticket classes' do
+
+    end
+
+    describe 'when filtering' do 
+
+      it 'can list future events' do
+        get '/events', params: { filter: { startingAt: 'gte ' + DateTime.now.iso8601 } }, headers: headers
+
+        # TODO abstract to: behaves_like 'successful get request'
+        expect(response).to have_http_status(:success)
+        expect(response.content_type).to eq('application/vnd.api+json')
+
+        res_body = JSON(response.body)
+
+        expect(res_body['data']).to be_an_instance_of(Array)
+        expect(res_body['data'].count).to eq(1)
+
+        event_start_datetime = res_body['data'][0]['attributes']['startingAt']
+        expected_start_datetime = @created_events[:published_future_event].starting_at.iso8601(3)
+
+        expect(event_start_datetime).to eq(expected_start_datetime)
+      end
+
+      xit 'cannot retrieve unpublished' do
+
+      end
+
+      xit 'cannot retrieve deleted events' do
+
+      end
     end
   end
 end
