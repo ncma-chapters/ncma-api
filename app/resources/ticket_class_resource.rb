@@ -1,8 +1,19 @@
 class TicketClassResource < ApplicationResource
-  attributes  :name, :description, :minimum_quantity, :maximum_quantity, :sorting,
-              :capacity, :sales_start, :sales_end, :order_confirmation_message, :price
-
-  has_one :events
+  immutable
+  
+  has_one :event
+  
+  attributes  :name,
+              :description,
+              :minimum_quantity,
+              :maximum_quantity,
+              :sorting,
+              :capacity,
+              :sales_start,
+              :sales_end,
+              :order_confirmation_message,
+              :price,
+              :event_id
 
   def price
     {
