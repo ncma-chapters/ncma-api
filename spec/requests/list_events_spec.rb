@@ -138,9 +138,6 @@ RSpec.describe 'Event List', :type => :request do
       get '/events',
         headers: headers,
         params: {
-          # TODO: move ticketClass tests to it's own request specs.
-          # They will not be fetched with the event list, they will be feteched on a per event basis.
-          # This will unclog this spec
           include: 'venue,ticketClasses',
           filter: { startingAt: 'gte ' + DateTime.now.iso8601 }
         }
