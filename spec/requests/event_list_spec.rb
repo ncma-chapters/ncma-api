@@ -178,9 +178,9 @@ RSpec.describe 'Event List', :type => :request do
       expect(ticketClass1['attributes']['name']).to eq(expected_event_3.ticket_classes[0].name)
       expect(ticketClass1['attributes']['createdAt']).to be_present
       expect(ticketClass1['attributes']['updatedAt']).to be_present
-      expect(ticketClass1['attributes']['cost']['value']).to eq(expected_event_3.ticket_classes[0].cost.cents)
-      expect(ticketClass1['attributes']['cost']['display']).to eq(expected_event_3.ticket_classes[0].cost.format)
-      expect(ticketClass1['attributes']['cost']['currency']).to eq(expected_event_3.ticket_classes[0].cost.currency.iso_code)
+      expect(ticketClass1['attributes']['price']['value']).to eq(expected_event_3.ticket_classes[0].price.cents)
+      expect(ticketClass1['attributes']['price']['display']).to eq(expected_event_3.ticket_classes[0].price.format)
+      expect(ticketClass1['attributes']['price']['currency']).to eq(expected_event_3.ticket_classes[0].price.currency.iso_code)
       expect(ticketClass1['attributes']['minimumQuantity']).to eq(expected_event_3.ticket_classes[0].minimum_quantity)
 
       expect(ticketClass1['attributes']['maximumQuantity']).to eq(expected_event_3.ticket_classes[0].maximum_quantity)
@@ -194,9 +194,9 @@ RSpec.describe 'Event List', :type => :request do
       expect(ticketClass2['attributes']['name']).to eq(expected_event_3.ticket_classes[1].name)
       expect(ticketClass2['attributes']['createdAt']).to be_present
       expect(ticketClass2['attributes']['updatedAt']).to be_present
-      expect(ticketClass2['attributes']['cost']['value']).to eq(expected_event_3.ticket_classes[1].cost.cents)
-      expect(ticketClass2['attributes']['cost']['display']).to eq(expected_event_3.ticket_classes[1].cost.format)
-      expect(ticketClass2['attributes']['cost']['currency']).to eq(expected_event_3.ticket_classes[1].cost.currency.iso_code)
+      expect(ticketClass2['attributes']['price']['value']).to eq(expected_event_3.ticket_classes[1].price.cents)
+      expect(ticketClass2['attributes']['price']['display']).to eq(expected_event_3.ticket_classes[1].price.format)
+      expect(ticketClass2['attributes']['price']['currency']).to eq(expected_event_3.ticket_classes[1].price.currency.iso_code)
       expect(ticketClass2['attributes']['minimumQuantity']).to eq(expected_event_3.ticket_classes[1].minimum_quantity)
       expect(ticketClass2['attributes']['maximumQuantity']).to eq(expected_event_3.ticket_classes[1].maximum_quantity)
       expect(ticketClass2['attributes']['sorting']).to eq(expected_event_3.ticket_classes[1].sorting)

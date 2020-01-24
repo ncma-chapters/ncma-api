@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_01_23_050257) do
     t.string "description"
     t.integer "minimum_quantity"
     t.integer "maximum_quantity"
-    t.integer "cost_cents", default: 0, null: false
-    t.string "cost_currency", default: "USD", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
     t.integer "sorting"
     t.integer "capacity"
     t.datetime "sales_start"

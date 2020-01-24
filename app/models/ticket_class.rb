@@ -1,5 +1,5 @@
 class TicketClass < ApplicationRecord
-  monetize :cost_cents
+  monetize :price_cents
 
   belongs_to :event
 end

@@ -5,7 +5,7 @@ class CreateTicketClasses < ActiveRecord::Migration[6.0]
       t.string :description
       t.integer :minimum_quantity
       t.integer :maximum_quantity
-      t.monetize :cost
+      t.monetize :price
       t.integer :sorting
       t.integer :capacity
       t.datetime :sales_start
