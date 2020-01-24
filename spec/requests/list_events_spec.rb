@@ -5,8 +5,6 @@ RSpec.describe 'Event List', :type => :request do
 
   before(:all) do
     @created_events = {}
-    @created_venue_ids = []
-    @created_ticket_class_ids = []
 
     [
       :unpublished_future_event,
@@ -22,25 +20,26 @@ RSpec.describe 'Event List', :type => :request do
     ].each do |key|
       event = create(key)
       @created_events[key] = event
-
-      # :published_future_event_with_venue creates a venue
-      @created_venue_ids.push(event.venue_id) if event.venue_id
-
-      # :published_future_event_with_ticket_classes creates two ticket classes
-      if event.ticket_classes.any?
-        ids = event.ticket_classes.map(&:id)
-        @created_ticket_class_ids.concat(ids)
-      end
     end
   end
 
   after(:all) do
-    ids = @created_events.values.map(&:id)
+    to_delete = { ticket_class_ids: [], event_ids: [], venue_ids: [] }
 
-    # Hard delete all records created by this test suite
-    TicketClass.unscoped.where(id: @created_ticket_class_ids).destroy_all # delete these first
-    Event.unscoped.where(id: ids).destroy_all
-    Venue.unscoped.where(id: @created_venue_ids).destroy_all
+    @created_events.each do |factory_id, event|
+      to_delete[:event_ids].push(event.id)
+      to_delete[:venue_ids].push(event.venue.id) if event.venue
+      
+      if event.ticket_classes.any?
+        ids = event.ticket_classes.map(&:id)
+        to_delete[:ticket_class_ids].concat(ids)
+      end
+    end
+
+    [TicketClass, Event, Venue].each do |klcass|
+      id_list = to_delete["#{klcass.table_name.singularize}_ids".to_sym]
+      klcass.unscoped.where(id: id_list).destroy_all
+    end
   end
 
   describe 'GET /events' do
@@ -92,7 +91,7 @@ RSpec.describe 'Event List', :type => :request do
       expect(event_3['attributes']['endingAt']).to eq(expected_event_3.ending_at.iso8601(3))
       expect(event_3['attributes']['publishedAt']).to eq(expected_event_3.published_at.iso8601(3))
       expect(event_3['attributes']['deletedAt']).to eq(nil)
-      expect(event_3['attributes']['venueId']).to eq(@created_venue_ids[0]) # we only created one venue, so check that one.
+      expect(event_3['attributes']['venueId']).to eq(expected_event_3.venue.id)
     end
 
     describe 'when filtering' do
