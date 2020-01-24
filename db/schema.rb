@@ -10,21 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_09_214559) do
+ActiveRecord::Schema.define(version: 2020_01_23_050257) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "venue_id"
     t.datetime "published_at"
     t.datetime "starting_at"
     t.datetime "ending_at"
+    t.integer "venue_id"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["deleted_at"], name: "index_events_on_deleted_at"
     t.index ["published_at"], name: "index_events_on_published_at"
     t.index ["venue_id"], name: "index_events_on_venue_id"
+  end
+
+  create_table "ticket_classes", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "minimum_quantity"
+    t.integer "maximum_quantity"
+    t.integer "cost_cents", default: 0, null: false
+    t.string "cost_currency", default: "USD", null: false
+    t.integer "sorting"
+    t.integer "capacity"
+    t.datetime "sales_start"
+    t.datetime "sales_end"
+    t.string "order_confirmation_message"
+    t.integer "event_id"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_ticket_classes_on_deleted_at"
+    t.index ["event_id"], name: "index_ticket_classes_on_event_id"
   end
 
   create_table "venues", force: :cascade do |t|
@@ -39,4 +59,5 @@ ActiveRecord::Schema.define(version: 2020_01_09_214559) do
   end
 
   add_foreign_key "events", "venues"
+  add_foreign_key "ticket_classes", "events"
 end

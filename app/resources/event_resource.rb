@@ -4,6 +4,7 @@ class EventResource < ApplicationResource
   attributes :name, :description, :venue_id, :published_at, :starting_at, :ending_at
   filter :starting_at, apply: comparison_filter_for(:starting_at)
   has_one :venue # has_one for JSONAPI::Resources and belongs_to for ActiveRecord
+  has_many :ticket_classes
 
   # https://github.com/cerebris/jsonapi-resources-site/blob/master/src/v0.9/guide/resources.md#customizing-base-records-for-finder-methods
   def self.records(options = {})

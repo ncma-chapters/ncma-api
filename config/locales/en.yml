@@ -31,3 +31,16 @@
 
 en:
   hello: "Hello world"
+
+  # Money gem (https://github.com/RubyMoney/money#localization)
+  number:
+    currency:
+      format:
+        delimiter: ","
+        separator: "."
+  
+  # falling back to
+  number:
+    format:
+      delimiter: ","
+      separator: "."
