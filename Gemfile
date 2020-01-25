@@ -27,9 +27,12 @@ gem 'jsonapi-resources', '0.10.0'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+gem 'money-rails', '~>1.12'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry', '~> 0.12.2'
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
 end

@@ -4,4 +4,5 @@ class Event < ApplicationRecord
   validates :name, presence: true
 
   belongs_to :venue, optional: true
+  has_many :ticket_classes
 end
