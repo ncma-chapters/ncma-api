@@ -9,9 +9,10 @@ RSpec.describe 'Free Event Registration', :type => :request do
   end
 
   after do
-    # @ticket_class.destroy
-    # @event.venue.destroy
-    # @event.destroy
+    @ticket_class.event_registrations.destroy_all
+    @ticket_class.destroy
+    deleted_event = @event.destroy
+    deleted_event.venue.destroy
   end
 
   it 'allows anyone to register without payment' do
@@ -32,7 +33,6 @@ RSpec.describe 'Free Event Registration', :type => :request do
       }
     }
 
-    # post "/events/#{@event.id}/ticket-classes/#{@ticket_class.id}/event-registrations", params: request_body, headers: headers, as: :json
     post "/event-registrations", params: request_body, headers: headers, as: :json
 
     expect(response.status).to eq(201)
