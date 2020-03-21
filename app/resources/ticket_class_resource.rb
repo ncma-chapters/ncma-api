@@ -1,7 +1,8 @@
 class TicketClassResource < ApplicationResource
   immutable
   
-  has_one :event
+  has_one   :event
+  has_many  :event_registrations
   
   attributes  :name,
               :description,
