@@ -6,8 +6,6 @@ class TicketClassResource < ApplicationResource
   
   attributes  :name,
               :description,
-              :minimum_quantity,
-              :maximum_quantity,
               :sorting,
               :capacity,
               :sales_start,

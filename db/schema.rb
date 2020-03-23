@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.integer "capacity", default: 200
     t.datetime "published_at"
     t.datetime "starting_at"
     t.datetime "ending_at"
@@ -40,8 +41,6 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
   create_table "ticket_classes", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.integer "minimum_quantity"
-    t.integer "maximum_quantity"
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
     t.integer "sorting"
