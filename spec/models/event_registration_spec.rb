@@ -92,7 +92,7 @@ RSpec.describe EventRegistration, :type => :model do
           )
         end
 
-        it 'provides errors for missing required properties properties' do
+        it 'provides errors for missing required properties' do
           subject.ticket_class = create(:ticket_class, event: create(:event))
           subject.data = {}
 

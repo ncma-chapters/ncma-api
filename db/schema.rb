@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
     t.datetime "published_at"
     t.datetime "starting_at"
     t.datetime "ending_at"
+    t.datetime "canceled_at"
     t.integer "venue_id"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false

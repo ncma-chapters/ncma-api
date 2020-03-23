@@ -36,4 +36,8 @@ class Event < ApplicationRecord
   def upcoming?
     !!starting_at && starting_at > DateTime.now
   end
+
+  def canceled?
+    !!canceled_at
+  end
 end

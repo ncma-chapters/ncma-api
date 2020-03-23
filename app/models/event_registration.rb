@@ -3,6 +3,7 @@ class EventRegistration < ApplicationRecord
 
   validate :event_is_published, :on => :create
   validate :event_is_upcoming, :on => :create
+  validate :event_is_not_canceled, :on => :create
 
   validates   :data,
               presence: true,
