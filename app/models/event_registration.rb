@@ -1,4 +1,9 @@
 class EventRegistration < ApplicationRecord
+  include EventRelationUtils
+
+  validate :event_is_published, :on => :create
+  validate :event_is_upcoming, :on => :create
+
   validates   :data,
               presence: true,
               # Fetching the schema requires an event to be attached, which requires a ticket_class to be attached.

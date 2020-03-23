@@ -29,15 +29,36 @@ RSpec.describe EventRegistration, :type => :model do
         expect(subject.errors.details[:ticket_class][0]).to eq({ :error=>:blank })
       end
 
+      describe 'validating #event' do
+        it 'validates that the event is upcoming' do
+          subject.ticket_class = create(:ticket_class, event: create(:published_past_event))
+
+          result = subject.save
+
+          expect(result).to eq(false)
+          expect(subject.errors.messages[:base]).to eq(['Event must be upcoming'])
+        end
+
+        it 'validates that the event is published' do
+          event = create(:event)
+          subject.ticket_class = create(:ticket_class, event: create(:unpublished_future_event))
+
+          result = subject.save
+
+          expect(result).to eq(false)
+          expect(subject.errors.messages[:base]).to eq(['Event must be published'])
+        end
+      end
+
       describe 'validating #data' do
         it 'validates #data against its event\'s registration_schema when after properties are valid' do
           data = { firstName: 'Kevin', lastName: 'Mirc', email: 'kevin@example.com' }
 
-          subject.ticket_class = create(:ticket_class, event: create(:event))
+          subject.ticket_class = create(:ticket_class, event: create(:published_future_event))
           subject.data = data
 
           result = subject.save
-          
+
           expect(result).to eq(true)
           expect(subject.id).to be > 0
           expect(subject.data.to_json).to eq(data.to_json)
@@ -46,7 +67,7 @@ RSpec.describe EventRegistration, :type => :model do
         it 'allows other properties defined on schema' do
           data = { firstName: 'Kevin', lastName: 'Mirc', email: 'kevin@example.com', title: 'Software Engineer', company: 'Example.com' }
 
-          subject.ticket_class = create(:ticket_class, event: create(:event))
+          subject.ticket_class = create(:ticket_class, event: create(:published_future_event))
           subject.data = data
 
           result = subject.save
@@ -57,7 +78,7 @@ RSpec.describe EventRegistration, :type => :model do
         end
 
         it 'does not accept extra properties' do
-          subject.ticket_class = create(:ticket_class, event: create(:event))
+          subject.ticket_class = create(:ticket_class, event: create(:published_future_event))
           subject.data = { firstName: 'Kevin', lastName: 'Mirc', email: 'kevin@example.com', extra: 'property'}
 
           result = subject.save

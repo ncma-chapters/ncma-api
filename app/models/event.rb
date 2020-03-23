@@ -21,4 +21,16 @@ class Event < ApplicationRecord
       }
     }.to_json
   end
+
+  def deleted?
+    !!deleted_at
+  end
+
+  def published?
+    !deleted? && !!published_at && published_at <= DateTime.now
+  end
+
+  def upcoming?
+    !!starting_at && starting_at > DateTime.now
+  end
 end
