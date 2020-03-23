@@ -12,7 +12,7 @@ class CreateTicketClasses < ActiveRecord::Migration[6.0]
       t.datetime :sales_end
       t.string :order_confirmation_message
 
-      t.references :event, foreign_key: true
+      t.references :event, null: false, foreign_key: true
 
       t.datetime :deleted_at
       t.timestamps
