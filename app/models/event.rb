@@ -15,7 +15,10 @@ class Event < ApplicationRecord
       properties: {
         firstName: { type: 'string' },
         lastName: { type: 'string' },
-        email: { type: 'string' },
+        email: {
+          type: 'string',
+          pattern: '^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$',
+        },
         title: { type: 'string' },
         company: { type: 'string' },
       }
