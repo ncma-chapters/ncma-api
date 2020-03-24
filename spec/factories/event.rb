@@ -71,8 +71,8 @@ FactoryBot.define do
       venue
 
       after(:create) do |event, evaluator|
-        create  :ticket_class, event: event, maximum_quantity: 5, sorting: 1, capacity: 10
-        create  :ticket_class, name: 'Premium', event: event, maximum_quantity: 5, sorting: 2, capacity: 10
+        create  :ticket_class, event: event, sorting: 1, capacity: 10
+        create  :ticket_class, name: 'Premium', event: event, sorting: 2, capacity: 10
       end
     end
   end

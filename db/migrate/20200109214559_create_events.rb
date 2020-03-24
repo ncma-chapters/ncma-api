@@ -3,9 +3,11 @@ class CreateEvents < ActiveRecord::Migration[6.0]
     create_table :events do |t|
       t.string :name
       t.text :description
+      t.integer :capacity, default: 200
       t.datetime :published_at
       t.datetime :starting_at
       t.datetime :ending_at
+      t.datetime :canceled_at
 
       t.references :venue, foreign_key: true
       
