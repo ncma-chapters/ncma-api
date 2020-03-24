@@ -7,6 +7,10 @@ class Event < ApplicationRecord
   has_many :ticket_classes
   has_many :event_registrations, through: :ticket_classes
 
+  def remaining_capacity
+    capacity - event_registrations.size
+  end
+
   def registration_schema
     {
       type: 'object',

@@ -1,6 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe Event, :type => :model do
+  describe '#remaining_capacity' do
+    it 'defaults to 200' do
+      expect(subject.remaining_capacity).to eq(200)
+    end
+
+    it 'returns the capacity less all it\'s registrations' do
+      # Save an event
+      subject.name = 'My Event'
+      subject.starting_at = DateTime.now + 30
+      subject.published_at = DateTime.now - 1
+
+      subject.save!
+
+      # Create 2 ticket classes
+      tc_1 = create(:ticket_class, name: 'Basic', price: 0, event_id: subject.id)
+      tc_2 = create(:ticket_class, name: 'Plus', price: 0, event_id: subject.id)
+
+      # Create 4 registrations (2 for each ticket class)
+      create(:event_registration, ticket_class: tc_1)
+      create(:event_registration, ticket_class: tc_1)
+      create(:event_registration, ticket_class: tc_2)
+      create(:event_registration, ticket_class: tc_2)
+
+      expect(subject.remaining_capacity).to eq(200 - 4)
+    end
+  end
+
   describe '#deleted?' do
     it 'returns true if deleted_at is set' do
       expect(subject.deleted?).to eq(false)

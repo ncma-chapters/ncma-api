@@ -22,11 +22,32 @@ RSpec.describe EventRegistration, :type => :model do
     end
 
     describe '#save' do
-      it 'validates the presence of a ticket_class' do
-        expect(subject.save).to eq(false)
 
-        expect(subject.errors.messages[:ticket_class][0]).to eq('must exist')
-        expect(subject.errors.details[:ticket_class][0]).to eq({ :error=>:blank })
+      describe 'validating #ticket_class' do
+        it 'validates the presence of a ticket_class' do
+          expect(subject.save).to eq(false)
+
+          expect(subject.errors.messages[:ticket_class][0]).to eq('must exist')
+          expect(subject.errors.details[:ticket_class][0]).to eq({ :error=>:blank })
+        end
+
+        it 'validates the capacity of the ticket_class' do
+          data = { firstName: 'Kevin', lastName: 'Mirc', email: 'kevin@example.com' }
+          event = create(:published_future_event)
+          tc = create(:ticket_class, capacity: 2, event_id: event.id)
+
+          subject.ticket_class_id = tc.id
+          subject.data = data
+
+          # Insert registrations to reach the tc's capacity
+          create(:event_registration, ticket_class_id: tc.id)
+          create(:event_registration, ticket_class_id: tc.id)
+
+          result = subject.save
+
+          expect(result).to eq(false)
+          expect(subject.errors.messages[:base]).to include("Ticket Class is at capacity")
+        end
       end
 
       describe 'validating #event' do
@@ -47,6 +68,24 @@ RSpec.describe EventRegistration, :type => :model do
 
           expect(result).to eq(false)
           expect(subject.errors.messages[:base]).to eq(['Event must be published'])
+        end
+
+        it 'validates the capacity of the event' do
+          data = { firstName: 'Kevin', lastName: 'Mirc', email: 'kevin@example.com' }
+          event = create(:published_future_event, capacity: 2)
+          tc = create(:ticket_class, capacity: 3, event_id: event.id)
+
+          subject.ticket_class_id = tc.id
+          subject.data = data
+
+          # Insert registrations to reach the event's capacity
+          create(:event_registration, ticket_class_id: tc.id)
+          create(:event_registration, ticket_class_id: tc.id)
+
+          result = subject.save
+
+          expect(result).to eq(false)
+          expect(subject.errors.messages[:base]).to include("Event is at capacity")
         end
       end
 

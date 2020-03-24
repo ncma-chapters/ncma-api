@@ -1,9 +1,11 @@
 class EventRegistration < ApplicationRecord
-  include EventRelationUtils
+  include EventRegistrationValidations
 
   validate :event_is_published, :on => :create
   validate :event_is_upcoming, :on => :create
   validate :event_is_not_canceled, :on => :create
+  validate :event_has_capacity, :on => :create
+  validate :ticket_class_has_capacity, :on => :create
 
   validates   :data,
               presence: true,
