@@ -1,0 +1,486 @@
+{
+	"info": {
+		"_postman_id": "eeb21c50-37f6-4a38-958f-9af5fff2db0a",
+		"name": "NCMA API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Request Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{AUTH_URI}}/oauth/authorize?client_id={{AUTH_CLIENT_ID}}&response_type=code&state=ABC123abc123&redirect_uri={{AUTH_REDIRECT_URL}}&scope=phone email openid profile",
+							"host": [
+								"{{AUTH_URI}}"
+							],
+							"path": [
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{AUTH_CLIENT_ID}}"
+								},
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "state",
+									"value": "ABC123abc123"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{AUTH_REDIRECT_URL}}"
+								},
+								{
+									"key": "scope",
+									"value": "phone email openid profile"
+								}
+							]
+						},
+						"description": "Request an auth token."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Venues",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "List Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URI}}/events",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Events",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URI}}/events",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f8253434d737af4c8bab1aa008967e56\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "5b1d899c-d340-4222-96cd-2cf2ba028275"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.013871"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"events\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/events/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:02:04.087Z\",\n                \"updatedAt\": \"2020-04-09T01:02:04.087Z\",\n                \"name\": \"Developing Winning Proposals\",\n                \"description\": \"Developing Winning Proposals is designed to provide you with the nuts and bolts you need to review a request for proposal (RFP), put a proposal together, and develop the detailed cost estimates you need to convince a customer that you can best satisfy their needs. This seminar is designed for everyone involved in the development and response to an RFP. In addition to contract management professionals, this program benefits anyone involved in the acquisition process: managers, directors, financial analysts, engineers, and business development employees, among others.\",\n                \"venueId\": 1,\n                \"publishedAt\": \"2020-04-09T01:01:09.129Z\",\n                \"startingAt\": \"2020-04-23T01:01:33.867Z\",\n                \"endingAt\": \"2020-04-23T03:01:49.399Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:3000/events?page%5Bnumber%5D=1&page%5Bsize%5D=20\",\n        \"last\": \"http://localhost:3000/events?page%5Bnumber%5D=1&page%5Bsize%5D=20\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Event ƒ(startingAt)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URI}}/events?filter[startingAt]=gte 2020-04-08T21:08:11-04:00",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "filter[startingAt]",
+									"value": "gte 2020-04-08T21:08:11-04:00"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Event ƒ(startingAt)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URI}}/events?filter[startingAt]=gte 2020-04-08T21:08:11-04:00",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "filter[startingAt]",
+											"value": "gte 2020-04-08T21:08:11-04:00"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4ba14ada21b7348ac2553681a4f511b0\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "d3fba675-e207-408a-9e49-473c76367b3b"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.016500"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"events\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/events/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:02:04.087Z\",\n                \"updatedAt\": \"2020-04-09T01:02:04.087Z\",\n                \"name\": \"Developing Winning Proposals\",\n                \"description\": \"Developing Winning Proposals is designed to provide you with the nuts and bolts you need to review a request for proposal (RFP), put a proposal together, and develop the detailed cost estimates you need to convince a customer that you can best satisfy their needs. This seminar is designed for everyone involved in the development and response to an RFP. In addition to contract management professionals, this program benefits anyone involved in the acquisition process: managers, directors, financial analysts, engineers, and business development employees, among others.\",\n                \"venueId\": 1,\n                \"publishedAt\": \"2020-04-09T01:01:09.129Z\",\n                \"startingAt\": \"2020-04-23T01:01:33.867Z\",\n                \"endingAt\": \"2020-04-23T03:01:49.399Z\"\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:3000/events?filter%5BstartingAt%5D=gte+2020-04-08T21%3A08%3A11-04%3A00&page%5Bnumber%5D=1&page%5Bsize%5D=20\",\n        \"last\": \"http://localhost:3000/events?filter%5BstartingAt%5D=gte+2020-04-08T21%3A08%3A11-04%3A00&page%5Bnumber%5D=1&page%5Bsize%5D=20\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Events +(Venue,TicketClasses)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URI}}/events?include=venue,ticketClasses",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "venue,ticketClasses"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Events +(Venue)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URI}}/events?include=venue,ticketClasses",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "venue,ticketClasses"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aaf74ead40a9e2281ced7e923091a921\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "21ee424d-2c46-4a36-b4f9-ba1529c97d89"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.015895"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"events\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/events/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:02:04.087Z\",\n                \"updatedAt\": \"2020-04-09T01:02:04.087Z\",\n                \"name\": \"Developing Winning Proposals\",\n                \"description\": \"Developing Winning Proposals is designed to provide you with the nuts and bolts you need to review a request for proposal (RFP), put a proposal together, and develop the detailed cost estimates you need to convince a customer that you can best satisfy their needs. This seminar is designed for everyone involved in the development and response to an RFP. In addition to contract management professionals, this program benefits anyone involved in the acquisition process: managers, directors, financial analysts, engineers, and business development employees, among others.\",\n                \"venueId\": 1,\n                \"publishedAt\": \"2020-04-09T01:01:09.129Z\",\n                \"startingAt\": \"2020-04-23T01:01:33.867Z\",\n                \"endingAt\": \"2020-04-23T03:01:49.399Z\"\n            },\n            \"relationships\": {\n                \"venue\": {\n                    \"data\": {\n                        \"type\": \"venues\",\n                        \"id\": \"1\"\n                    }\n                },\n                \"ticketClasses\": {\n                    \"data\": [\n                        {\n                            \"type\": \"ticketClasses\",\n                            \"id\": \"1\"\n                        },\n                        {\n                            \"type\": \"ticketClasses\",\n                            \"id\": \"2\"\n                        }\n                    ]\n                }\n            }\n        }\n    ],\n    \"included\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"venues\",\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T00:58:17.204Z\",\n                \"updatedAt\": \"2020-04-09T00:58:17.204Z\",\n                \"name\": \"Station House\",\n                \"ageRestriction\": null,\n                \"capacity\": 250,\n                \"address\": {\n                    \"street\": \"260 1st Ave S\",\n                    \"street2\": \"#200\",\n                    \"city\": \"St. Petersburg\",\n                    \"state\": \"FL\",\n                    \"zip\": \"33701\"\n                }\n            },\n            \"relationships\": {\n                \"events\": {\n                    \"data\": [\n                        {\n                            \"type\": \"events\",\n                            \"id\": \"1\"\n                        }\n                    ]\n                }\n            }\n        },\n        {\n            \"id\": \"1\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:17:22.148Z\",\n                \"updatedAt\": \"2020-04-09T01:17:22.148Z\",\n                \"name\": \"Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 0,\n                    \"display\": \"$0.00\"\n                },\n                \"eventId\": 1\n            },\n            \"relationships\": {\n                \"event\": {\n                    \"data\": {\n                        \"type\": \"events\",\n                        \"id\": \"1\"\n                    }\n                }\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/2\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:18:50.817Z\",\n                \"updatedAt\": \"2020-04-09T01:18:50.817Z\",\n                \"name\": \"Non Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 2500,\n                    \"display\": \"$25.00\"\n                },\n                \"eventId\": 1\n            },\n            \"relationships\": {\n                \"event\": {\n                    \"data\": {\n                        \"type\": \"events\",\n                        \"id\": \"1\"\n                    }\n                }\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:3000/events?include=venue%2CticketClasses&page%5Bnumber%5D=1&page%5Bsize%5D=20\",\n        \"last\": \"http://localhost:3000/events?include=venue%2CticketClasses&page%5Bnumber%5D=1&page%5Bsize%5D=20\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "TicketClasses",
+			"item": [
+				{
+					"name": "List TicketClasses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URI}}/events/{{event_id}}/ticket-classes",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"ticket-classes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List TicketClasses",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URI}}/events/{{event_id}}/ticket-classes",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"events",
+										"{{event_id}}",
+										"ticket-classes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c948c96c9249ce56103e757f7ce8724\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "5a573d61-98d5-42d8-ba50-0bba89f92c28"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.072619"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:17:22.148Z\",\n                \"updatedAt\": \"2020-04-09T01:17:22.148Z\",\n                \"name\": \"Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 0,\n                    \"display\": \"$0.00\"\n                },\n                \"eventId\": 1\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/2\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:18:50.817Z\",\n                \"updatedAt\": \"2020-04-09T01:18:50.817Z\",\n                \"name\": \"Non Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 2500,\n                    \"display\": \"$25.00\"\n                },\n                \"eventId\": 1\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:3000/ticket-classes?page%5Bnumber%5D=1&page%5Bsize%5D=20\",\n        \"last\": \"http://localhost:3000/ticket-classes?page%5Bnumber%5D=1&page%5Bsize%5D=20\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
