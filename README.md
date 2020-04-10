@@ -1,7 +1,12 @@
 # NCMA API
 
-## System dependencies
+## System Dependencies
 Ruby `2.6.5`
 
-## How to run the test suite
+## Development
+### Seeding the DB
+`rails db:seed`
+
+## Testing
 `rspec`
+
