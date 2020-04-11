@@ -11,14 +11,7 @@ class TicketClassResource < ApplicationResource
               :sales_start,
               :sales_end,
               :order_confirmation_message,
-              :price,
               :event_id
 
-  def price
-    {
-      currency: @model.price.currency.iso_code,
-      value: @model.price.fractional,
-      display: @model.price.format,
-    }
-  end
+  attribute :price, format: :currency
 end
