@@ -1,25 +1,35 @@
 class ApplicationResource < JSONAPI::Resource
-  # TODO: make this an extensable module and move to lib (or helpers)
-  def self.comparison_filter_for(target_attribute)
-    target_attribute = target_attribute.to_sym
-    comparative_tokens = { _default: :eq, eq: :eq , gte: :gteq, gt: :gt, lt: :lt, lte: :lteq }
+  class << self
+    # TODO: make this an extensable module and move to lib (or helpers)
+    def comparison_filter_for(target_attribute)
+      target_attribute = target_attribute.to_sym
+      comparative_tokens = { _default: :eq, eq: :eq , gte: :gteq, gt: :gt, lt: :lt, lte: :lteq }
 
-    ->(records, value, _options) {
-      provided_params = value[0].split(' ') # ['2020-01-13T15:37:23-05:00'] or ['gte', '2020-01-13T15:37:23-05:00']
+      ->(records, value, _options) {
+        provided_params = value[0].split(' ') # ['2020-01-13T15:37:23-05:00'] or ['gte', '2020-01-13T15:37:23-05:00']
 
-      case provided_params.size
-      when 1
-        filter_operator = comparative_tokens[:_default]
-        filter_value = provided_params[0]
-      when 2
-        filter_operator = comparative_tokens[provided_params[0].to_sym] || comparative_tokens[:_default]
-        filter_value = provided_params[1]
-      else
-        # TODO: Throw error for bad params (lookup JSON:API status code and JSON:API Resource error format)
-      end
+        case provided_params.size
+        when 1
+          filter_operator = comparative_tokens[:_default]
+          filter_value = provided_params[0]
+        when 2
+          filter_operator = comparative_tokens[provided_params[0].to_sym] || comparative_tokens[:_default]
+          filter_value = provided_params[1]
+        else
+          # TODO: Throw error for bad params (lookup JSON:API status code and JSON:API Resource error format)
+        end
 
-      records.where(self._model_class.arel_table[target_attribute].send(filter_operator, filter_value))
-    }
+        records.where(self._model_class.arel_table[target_attribute].send(filter_operator, filter_value))
+      }
+    end
+
+    def updatable_fields(context)
+      super - [:created_at, :updated_at]
+    end
+
+    def creatable_fields(context)
+      super - [:created_at, :updated_at]
+    end
   end
 
   abstract
