@@ -1,5 +1,5 @@
 class EventPolicy < ApplicationPolicy
   def create?
-    false
+    user_is_event_manager
   end
 end
