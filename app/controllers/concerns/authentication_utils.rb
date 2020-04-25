@@ -5,21 +5,15 @@ module AuthenticationUtils
     private
 
     def get_user_context
-      return nil if auth_token.nil?
+      auth_token = request.authorization.split('Bearer ')[1]
 
-      id_token =  if Rails.env.test?
+      id_token = if Rails.env.test?
         JWT.decode(auth_token, Rails.configuration.jwt_secret, true, { algorithm: 'HS256' })
       else
         JWT.decode(auth_token, nil, true, { algorithms: ['RS256'], jwks: jwks_loader })
       end
 
       RequestContext::Context::User.new(id_token)
-    rescue Exception => e
-      nil
-    end
-
-    def auth_token
-      request.authorization.split('Bearer ')[1]
     rescue Exception => e
       nil
     end

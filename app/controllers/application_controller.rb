@@ -6,6 +6,6 @@ class ApplicationController < ActionController::API
   abstract
 
   def context
-    RequestContext::Context.new(user: get_user_context)
+    RequestContext.new(user: get_user_context)
   end
 end
