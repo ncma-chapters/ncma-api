@@ -32,8 +32,6 @@ class ApplicationResource < JSONAPI::Resource
     end
   end
 
-  before_create :authorize_create
-
   abstract
   attributes :created_at, :updated_at
 
