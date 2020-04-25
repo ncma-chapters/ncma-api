@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Free Event Registration', :type => :request do
-  let (:headers) { { Accept: 'application/vnd.api+json', 'Content-Type': 'application/vnd.api+json' } }
-
   before do
     @event = create(:published_future_event_with_venue, name: 'AMA Webinar')
     @ticket_class = create(:ticket_class, event_id: @event.id, price: 0, name: 'General Registration')
@@ -33,7 +31,7 @@ RSpec.describe 'Free Event Registration', :type => :request do
       }
     }
 
-    post "/event-registrations", params: request_body, headers: headers, as: :json
+    post "/event-registrations", request_body
 
     expect(response.status).to eq(201)
 

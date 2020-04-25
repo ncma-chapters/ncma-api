@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Event List', :type => :request do
-  let (:headers) { { Accept: 'application/vnd.api+json', 'Content-Type': 'application/vnd.api+json' } }
-
   before(:all) do
     @created_events = {}
 
@@ -44,7 +42,7 @@ RSpec.describe 'Event List', :type => :request do
 
   describe 'GET /events' do
     it 'returns a list of non-deleted, published events by default' do
-      get '/events', headers: headers
+      get '/events'
 
       # TODO abstract to: behaves_like 'successful get request'
       expect(response).to have_http_status(:success)
@@ -97,7 +95,7 @@ RSpec.describe 'Event List', :type => :request do
     describe 'when filtering' do
 
       it 'can list future events' do
-        get '/events', headers: headers, params: { filter: { startingAt: 'gte ' + DateTime.now.iso8601 } }
+        get '/events', params: { filter: { startingAt: 'gte ' + DateTime.now.iso8601 } }
 
         # TODO abstract to: behaves_like 'successful get request'
         expect(response).to have_http_status(:success)
@@ -135,12 +133,10 @@ RSpec.describe 'Event List', :type => :request do
 
     # TODO: add ticket class to include statement and add resulting expectations
     it 'can include the venue and ticket classes' do
-      get '/events',
-        headers: headers,
-        params: {
-          include: 'venue,ticketClasses',
-          filter: { startingAt: 'gte ' + DateTime.now.iso8601 }
-        }
+      get '/events', params: {
+        include: 'venue,ticketClasses',
+        filter: { startingAt: 'gte ' + DateTime.now.iso8601 }
+      }
 
       res_body = JSON(response.body)
 

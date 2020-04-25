@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'List Ticket Classes', :type => :request do
-  let (:headers) { { Accept: 'application/vnd.api+json', 'Content-Type': 'application/vnd.api+json' } }
-
   before(:all) do
     @created_events = {}
 
@@ -33,7 +31,7 @@ RSpec.describe 'List Ticket Classes', :type => :request do
     it 'can list ticket classes for a given event' do
       event = @created_events.values[0]
       
-      get "/events/#{event.id}/ticket-classes", headers: headers
+      get "/events/#{event.id}/ticket-classes"
 
       expect(response).to have_http_status(:success)
       expect(response.content_type).to eq('application/vnd.api+json')
