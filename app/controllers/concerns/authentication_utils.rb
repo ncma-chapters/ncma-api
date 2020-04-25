@@ -2,20 +2,28 @@ module AuthenticationUtils
   extend ActiveSupport::Concern
 
   included do
+
     private
 
     def get_user_context
-      auth_token = request.authorization.split('Bearer ')[1]
+      # Continue without raising JWT::DecodeError, let authorization handle the error
+      return nil if request.authorization.nil?
 
-      id_token = if Rails.env.test?
-        JWT.decode(auth_token, Rails.configuration.jwt_secret, true, { algorithm: 'HS256' })
+      unparsed_token = request.authorization.split('Bearer ')[1]
+
+      token_payload, token_header = if Rails.env.test?
+        JWT.decode(unparsed_token, Rails.configuration.jwt_secret, true, { algorithm: 'HS256' })
       else
-        JWT.decode(auth_token, nil, true, { algorithms: ['RS256'], jwks: jwks_loader })
+        JWT.decode(unparsed_token, nil, true, { algorithms: ['RS256'], jwks: jwks_loader })
       end
 
-      RequestContext::Context::User.new(id_token)
+      RequestContext::User.new token_payload
+    rescue JWT::DecodeError => e
+      Rails.logger.info e
+      raise e
     rescue Exception => e
-      nil
+      Rails.logger.error e
+      raise e
     end
 
     def jwks_loader
