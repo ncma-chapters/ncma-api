@@ -35,9 +35,9 @@ module NcmaApi
     config.api_only = true
 
     # Setting env variables to config
-    config.auth = OpenStruct.new(
+    config.auth = {
       user_pool_id: ENV['AUTH_USER_POOL_ID']
-    )
+    }
 
     Money.locale_backend = :i18n # https://github.com/RubyMoney/money#localization
     Money.rounding_mode = BigDecimal::ROUND_HALF_UP

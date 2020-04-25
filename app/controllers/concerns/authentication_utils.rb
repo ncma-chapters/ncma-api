@@ -26,7 +26,7 @@ module AuthenticationUtils
     end
 
     def fetch_jwks_keys
-      user_pool_id = Rails.configuration.auth.user_pool_id
+      user_pool_id = Rails.configuration.auth[:user_pool_id]
 
       raise 'Rails.configuration.auth.user_pool_id is required' if user_pool_id.nil?
 
