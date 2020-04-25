@@ -32,6 +32,20 @@ class ApplicationResource < JSONAPI::Resource
     end
   end
 
+  before_create :authorize_create
+
   abstract
   attributes :created_at, :updated_at
+
+  def authorize_create
+    unless Pundit.policy!(context.user, @model).create?
+      raise_unauthorized("Not authorized to create #{@model.class.name.pluralize}")
+    end
+  end
+
+  private
+
+  def raise_unauthorized(message)
+    raise Pundit::NotAuthorizedError, message
+  end
 end
