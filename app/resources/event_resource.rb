@@ -6,8 +6,6 @@ class EventResource < ApplicationResource
 
   filter :starting_at, apply: comparison_filter_for(:starting_at)
 
-  before_create :authorize_create
-
   # https://github.com/cerebris/jsonapi-resources-site/blob/master/src/v0.9/guide/resources.md#customizing-base-records-for-finder-methods
   def self.records(options = {})
     # Unauthenticated users can only view undeleted, published events.
