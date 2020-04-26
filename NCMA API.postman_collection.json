@@ -9,7 +9,7 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Request Token",
+					"name": "Login (via Redirect)",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -58,6 +58,41 @@
 							]
 						},
 						"description": "Request an auth token."
+					},
+					"response": []
+				},
+				{
+					"name": "Login (via HTTP)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get jwks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://cognito-idp.us-east-1.amazonaws.com/{{AUTH_USER_POOL_ID}}/.well-known/jwks.json",
+							"protocol": "https",
+							"host": [
+								"cognito-idp",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"{{AUTH_USER_POOL_ID}}",
+								".well-known",
+								"jwks.json"
+							]
+						},
+						"description": "This endpoint provides the jwks endpoint for the server to get the cert and validate tokens."
 					},
 					"response": []
 				}
@@ -293,7 +328,7 @@
 					},
 					"response": [
 						{
-							"name": "List Events +(Venue)",
+							"name": "List Events +(Venue,TicketClasses)",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
@@ -372,6 +407,143 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"events\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/events/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:02:04.087Z\",\n                \"updatedAt\": \"2020-04-09T01:02:04.087Z\",\n                \"name\": \"Developing Winning Proposals\",\n                \"description\": \"Developing Winning Proposals is designed to provide you with the nuts and bolts you need to review a request for proposal (RFP), put a proposal together, and develop the detailed cost estimates you need to convince a customer that you can best satisfy their needs. This seminar is designed for everyone involved in the development and response to an RFP. In addition to contract management professionals, this program benefits anyone involved in the acquisition process: managers, directors, financial analysts, engineers, and business development employees, among others.\",\n                \"venueId\": 1,\n                \"publishedAt\": \"2020-04-09T01:01:09.129Z\",\n                \"startingAt\": \"2020-04-23T01:01:33.867Z\",\n                \"endingAt\": \"2020-04-23T03:01:49.399Z\"\n            },\n            \"relationships\": {\n                \"venue\": {\n                    \"data\": {\n                        \"type\": \"venues\",\n                        \"id\": \"1\"\n                    }\n                },\n                \"ticketClasses\": {\n                    \"data\": [\n                        {\n                            \"type\": \"ticketClasses\",\n                            \"id\": \"1\"\n                        },\n                        {\n                            \"type\": \"ticketClasses\",\n                            \"id\": \"2\"\n                        }\n                    ]\n                }\n            }\n        }\n    ],\n    \"included\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"venues\",\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T00:58:17.204Z\",\n                \"updatedAt\": \"2020-04-09T00:58:17.204Z\",\n                \"name\": \"Station House\",\n                \"ageRestriction\": null,\n                \"capacity\": 250,\n                \"address\": {\n                    \"street\": \"260 1st Ave S\",\n                    \"street2\": \"#200\",\n                    \"city\": \"St. Petersburg\",\n                    \"state\": \"FL\",\n                    \"zip\": \"33701\"\n                }\n            },\n            \"relationships\": {\n                \"events\": {\n                    \"data\": [\n                        {\n                            \"type\": \"events\",\n                            \"id\": \"1\"\n                        }\n                    ]\n                }\n            }\n        },\n        {\n            \"id\": \"1\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:17:22.148Z\",\n                \"updatedAt\": \"2020-04-09T01:17:22.148Z\",\n                \"name\": \"Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 0,\n                    \"display\": \"$0.00\"\n                },\n                \"eventId\": 1\n            },\n            \"relationships\": {\n                \"event\": {\n                    \"data\": {\n                        \"type\": \"events\",\n                        \"id\": \"1\"\n                    }\n                }\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/2\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:18:50.817Z\",\n                \"updatedAt\": \"2020-04-09T01:18:50.817Z\",\n                \"name\": \"Non Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 2500,\n                    \"display\": \"$25.00\"\n                },\n                \"eventId\": 1\n            },\n            \"relationships\": {\n                \"event\": {\n                    \"data\": {\n                        \"type\": \"events\",\n                        \"id\": \"1\"\n                    }\n                }\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:3000/events?include=venue%2CticketClasses&page%5Bnumber%5D=1&page%5Bsize%5D=20\",\n        \"last\": \"http://localhost:3000/events?include=venue%2CticketClasses&page%5Bnumber%5D=1&page%5Bsize%5D=20\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"events\",\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Developing Winning Proposals\",\n\t\t\t\"description\": \"Developing Winning Proposals is designed to provide you with the nuts and bolts you need to review a request for proposal (RFP).\",\n\t\t\t\"publishedAt\": \"2020-04-26T02:07:22-04:00\",\n\t\t\t\"startingAt\": \"2020-05-10T02:07:22-04:00\",\n\t\t\t\"endingAt\": \"2020-05-10T04:07:22-04:00\",\n\t\t\t\"venueId\": null\n\t\t}\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URI}}/events",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{AUTH_TOKEN}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"events\",\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Developing Winning Proposals\",\n\t\t\t\"description\": \"Developing Winning Proposals is designed to provide you with the nuts and bolts you need to review a request for proposal (RFP).\",\n\t\t\t\"publishedAt\": \"2020-04-26T02:07:22-04:00\",\n\t\t\t\"startingAt\": \"2020-05-10T02:07:22-04:00\",\n\t\t\t\"endingAt\": \"2020-05-10T04:07:22-04:00\",\n\t\t\t\"venueId\": null\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URI}}/events",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:3000/events/9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53d884c115e6378b2bcea9716ec751fc\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "a3b73d89-f420-4ecb-b290-87e6375d7ded"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.225020"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"9\",\n        \"type\": \"events\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/events/9\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-04-26T06:09:44.133Z\",\n            \"updatedAt\": \"2020-04-26T06:09:44.133Z\",\n            \"name\": \"Developing Winning Proposals\",\n            \"description\": \"Developing Winning Proposals is designed to provide you with the nuts and bolts you need to review a request for proposal (RFP).\",\n            \"venueId\": null,\n            \"publishedAt\": \"2020-04-26T06:07:22.000Z\",\n            \"startingAt\": \"2020-05-10T06:07:22.000Z\",\n            \"endingAt\": \"2020-05-10T08:07:22.000Z\"\n        }\n    }\n}"
 						}
 					]
 				}
