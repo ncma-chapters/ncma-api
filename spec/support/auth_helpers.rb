@@ -32,13 +32,14 @@ module RSpec
 
         payload['cognito:groups'] = groups if groups.any?
 
-        _user_context = payload
+        @user_context = RequestContext::User.new(payload)
 
         JWT.encode payload, JWT_SECRET, 'HS256' 
       end
 
       def _user_context=(payload)
-        @user_context = OpenStruct.new(id: payload['sub'], payload: payload)
+        binding.pry
+        
       end
 
       def _user_group_map

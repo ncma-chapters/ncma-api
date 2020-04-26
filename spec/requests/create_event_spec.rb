@@ -30,6 +30,8 @@ RSpec.describe 'Create Event', :type => :request do
 
     expect(response.status).to eq(201)
 
+    binding.pry
+
     res_body = JSON.parse(response.body)
 
     expect(res_body['data']['id']).to be_present
