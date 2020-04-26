@@ -45,4 +45,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+
+  # AuthenticationUtils will verify auth tokens with this secret when env is set to "test".
+  config.jwt_secret = 'secret'
 end

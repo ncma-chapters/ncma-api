@@ -1,6 +1,4 @@
 class EventResource < ApplicationResource
-  immutable
-
   has_one :venue # has_one for JSONAPI::Resources and belongs_to for ActiveRecord
   has_many :ticket_classes
 

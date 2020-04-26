@@ -1,7 +1,7 @@
 # NCMA API
 
 ## System Dependencies
-Ruby `2.6.5`
+Ruby `2.6.6`
 
 ## Development
 ### Seeding the DB
