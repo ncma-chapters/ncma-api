@@ -37,11 +37,6 @@ module RSpec
         JWT.encode payload, JWT_SECRET, 'HS256' 
       end
 
-      def _user_context=(payload)
-        binding.pry
-        
-      end
-
       def _user_group_map
         { event_manager: 'EventManagers' }
       end
