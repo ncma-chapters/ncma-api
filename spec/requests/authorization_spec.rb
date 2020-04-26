@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Authorization:', :type => :request do
-  shared_examples_for 'an unauthorized response for' do |resource, actions, factories|
+  shared_examples_for 'an unauthorized response for' do |resource, actions|
     actions.each do |action|
       http_method, factory = action[:method], action[:factory]
       route = '/' + resource.model_hint.dasherize
@@ -49,6 +49,13 @@ RSpec.describe 'Authorization:', :type => :request do
     { method: :put, factory: :venue },
     { method: :patch, factory: :venue },
   ]
+
+  it_behaves_like 'an unauthorized response for', TicketClassResource, [
+    { method: :post },
+    { method: :put, factory: :ticket_class },
+    { method: :patch, factory: :ticket_class },
+  ]
+
 
   describe 'out of scope requests' do
     context 'for events' do

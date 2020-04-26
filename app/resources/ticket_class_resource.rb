@@ -1,6 +1,4 @@
-class TicketClassResource < ApplicationResource
-  immutable
-  
+class TicketClassResource < ApplicationResource  
   has_one   :event
   has_many  :event_registrations
   

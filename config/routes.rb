@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     end
   end
 
+  jsonapi_resources :ticket_classes, only: [:create, :update] do
+  end
+
   jsonapi_resources :event_registrations, only: [:create] do
   end
 end

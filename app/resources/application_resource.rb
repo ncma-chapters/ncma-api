@@ -40,13 +40,13 @@ class ApplicationResource < JSONAPI::Resource
 
   def authorize_create
     unless Pundit.policy!(context.user, @model).create?
-      raise_forbidden("Not authorized to create #{@model.class.name.pluralize}")
+      raise_forbidden("Not authorized to create #{@model.class.name.titleize.pluralize}")
     end
   end
 
   def authorize_update
     unless Pundit.policy!(context.user, @model).update?
-      raise_forbidden("Not authorized to update #{@model.class.name.pluralize}")
+      raise_forbidden("Not authorized to update #{@model.class.name.titleize.pluralize}")
     end
   end
 

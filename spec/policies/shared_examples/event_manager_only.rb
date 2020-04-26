@@ -1,5 +1,5 @@
 RSpec.shared_examples_for 'it requires user to be in EventManagers group' do |method_name|
-  let (:factory) { described_class.to_s.gsub('Policy', '').downcase.to_sym }
+  let (:factory) { described_class.to_s.remove('Policy').underscore.to_sym }
 
   it 'returns false when user is nil' do
     subject = described_class.new nil, build(factory)
