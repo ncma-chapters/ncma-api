@@ -247,7 +247,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": {{venue_id}},\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{API_URI}}/venues/{{venue_id}}",
@@ -372,7 +372,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": {{venue_id}},\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{API_URI}}/venues/{{venue_id}}",
@@ -943,16 +943,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"events\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"New Name\"\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"events\",\n\t\t\"id\": {{event_id}},\n\t\t\"attributes\": {\n\t\t\t\"name\": \"New Name\"\n\t\t}\n\t}\n}"
 						},
 						"url": {
-							"raw": "{{API_URI}}/events/1",
+							"raw": "{{API_URI}}/events/{{event_id}}",
 							"host": [
 								"{{API_URI}}"
 							],
 							"path": [
 								"events",
-								"1"
+								"{{event_id}}"
 							]
 						}
 					},
@@ -976,7 +976,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"events\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"New New Name\"\n\t\t}\n\t}\n}"
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"events\",\n\t\t\"id\": {{event_id}},\n\t\t\"attributes\": {\n\t\t\t\"name\": \"New New Name\"\n\t\t}\n\t}\n}"
 						},
 						"url": {
 							"raw": "{{API_URI}}/events/{{event_id}}",
@@ -1183,6 +1183,383 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"data\": [\n        {\n            \"id\": \"1\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/1\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:17:22.148Z\",\n                \"updatedAt\": \"2020-04-09T01:17:22.148Z\",\n                \"name\": \"Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 0,\n                    \"display\": \"$0.00\"\n                },\n                \"eventId\": 1\n            }\n        },\n        {\n            \"id\": \"2\",\n            \"type\": \"ticketClasses\",\n            \"links\": {\n                \"self\": \"http://localhost:3000/ticket-classes/2\"\n            },\n            \"attributes\": {\n                \"createdAt\": \"2020-04-09T01:18:50.817Z\",\n                \"updatedAt\": \"2020-04-09T01:18:50.817Z\",\n                \"name\": \"Non Members\",\n                \"description\": null,\n                \"sorting\": null,\n                \"capacity\": null,\n                \"salesStart\": null,\n                \"salesEnd\": null,\n                \"orderConfirmationMessage\": null,\n                \"price\": {\n                    \"currency\": \"USD\",\n                    \"value\": 2500,\n                    \"display\": \"$25.00\"\n                },\n                \"eventId\": 1\n            }\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:3000/ticket-classes?page%5Bnumber%5D=1&page%5Bsize%5D=20\",\n        \"last\": \"http://localhost:3000/ticket-classes?page%5Bnumber%5D=1&page%5Bsize%5D=20\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Ticket Class",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{API_URI}}/ticket-classes",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"ticket-classes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Ticket Class",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{AUTH_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"ticketClasses\",\n\t\t\"attributes\": {\n\t\t\t\"name\": \"GA\",\n    \t\t\"description\": \"For Everyone\",\n\t\t\t\"price\": {\n\t\t\t\t\"value\": 1000\n    \t\t},\n    \t\t\"eventId\": {{event_id}}\n\t\t}\t\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{API_URI}}/ticket-classes",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"ticket-classes"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:3000/ticket-classes/1"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"71c823ebec0073bb266b25a065f97511\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "aa5dc6b5-d0ed-4d91-9271-dc7b300e51ab"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.278548"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"ticketClasses\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/ticket-classes/1\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-04-26T20:44:31.052Z\",\n            \"updatedAt\": \"2020-04-26T20:44:31.052Z\",\n            \"name\": \"GA\",\n            \"description\": \"For Everyone\",\n            \"sorting\": null,\n            \"capacity\": null,\n            \"salesStart\": null,\n            \"salesEnd\": null,\n            \"orderConfirmationMessage\": null,\n            \"eventId\": 1,\n            \"price\": {\n                \"currency\": \"USD\",\n                \"value\": 1000,\n                \"display\": \"$10.00\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Ticket Class",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"ticketClasses\",\n\t\t\"id\": {{ticket_class_id}},\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Not GA\",\n    \t\t\"description\": \"Not For Everyone\",\n\t\t\t\"price\": {\n\t\t\t\t\"value\": 100000\n    \t\t},\n    \t\t\"eventId\": {{event_id}}\n\t\t}\t\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{API_URI}}/ticket-classes/{{ticket_class_id}}",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"ticket-classes",
+								"{{ticket_class_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Ticket Class",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{AUTH_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"ticketClasses\",\n\t\t\"id\": {{ticket_class_id}},\n\t\t\"attributes\": {\n\t\t\t\"name\": \"Not GA\",\n    \t\t\"description\": \"Not For Everyone\",\n\t\t\t\"price\": {\n\t\t\t\t\"value\": 100000\n    \t\t},\n    \t\t\"eventId\": {{event_id}}\n\t\t}\t\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{API_URI}}/ticket-classes/{{ticket_class_id}}",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"ticket-classes",
+										"{{ticket_class_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5571260c744a7d608b0cc6b662dfd804\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "1a3dc0a0-2f21-40cc-b5df-bc3af7cc7e59"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.224489"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"ticketClasses\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/ticket-classes/1\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-04-26T20:44:31.052Z\",\n            \"updatedAt\": \"2020-04-26T20:46:18.915Z\",\n            \"name\": \"Not GA\",\n            \"description\": \"Not For Everyone\",\n            \"sorting\": null,\n            \"capacity\": null,\n            \"salesStart\": null,\n            \"salesEnd\": null,\n            \"orderConfirmationMessage\": null,\n            \"eventId\": 1,\n            \"price\": {\n                \"currency\": \"USD\",\n                \"value\": 100000,\n                \"display\": \"$1,000.00\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Ticket Class",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{API_URI}}/ticket-classes/{{ticket_class_id}}",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"ticket-classes",
+								"{{ticket_class_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Ticket Class",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{AUTH_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"ticketClasses\",\n\t\t\"id\": {{ticket_class_id}},\n\t\t\"attributes\": {\n\t\t\t\"name\": \"GA\",\n    \t\t\"description\": \"For Everyone\",\n\t\t\t\"price\": {\n\t\t\t\t\"value\": 1000\n    \t\t},\n    \t\t\"eventId\": {{event_id}}\n\t\t}\t\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{API_URI}}/ticket-classes/{{ticket_class_id}}",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"ticket-classes",
+										"{{ticket_class_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"db6c40b12e6f5e195199b01010e8263f\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "72bc8f14-78e4-4528-ae93-dd7c21820f44"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.224582"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"ticketClasses\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/ticket-classes/1\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-04-26T20:44:31.052Z\",\n            \"updatedAt\": \"2020-04-26T20:47:27.760Z\",\n            \"name\": \"GA\",\n            \"description\": \"For Everyone\",\n            \"sorting\": null,\n            \"capacity\": null,\n            \"salesStart\": null,\n            \"salesEnd\": null,\n            \"orderConfirmationMessage\": null,\n            \"eventId\": 1,\n            \"price\": {\n                \"currency\": \"USD\",\n                \"value\": 1000,\n                \"display\": \"$10.00\"\n            }\n        }\n    }\n}"
 						}
 					]
 				}
