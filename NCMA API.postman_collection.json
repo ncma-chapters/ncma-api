@@ -101,7 +101,385 @@
 		},
 		{
 			"name": "Venues",
-			"item": [],
+			"item": [
+				{
+					"name": "Create Venue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AUTH_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My Venue\",\n\t\t\t\"capacity\": 500,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{API_URI}}/venues",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"venues"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Venue",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{AUTH_TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My Venue\",\n\t\t\t\"capacity\": 500,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{API_URI}}/venues",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"venues"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:3000/venues/1"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"0f97a55993d3831332af47024434db4b\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "2334fbcd-5e71-4728-81d9-3a38da837f7f"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.270012"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"venues\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/venues/1\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-04-26T19:50:42.213Z\",\n            \"updatedAt\": \"2020-04-26T19:50:42.213Z\",\n            \"name\": \"My Venue\",\n            \"ageRestriction\": null,\n            \"capacity\": 500,\n            \"address\": {\n                \"street\": \"123 6th St. N.\",\n                \"street2\": \"#123\",\n                \"city\": \"St. Petersburg\",\n                \"state\": \"FL\",\n                \"zip\": \"33701\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Venue",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/vnd.api+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AUTH_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{API_URI}}/venues/{{venue_id}}",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"venues",
+								"{{venue_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Venue",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{AUTH_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{API_URI}}/venues/{{venue_id}}",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"venues",
+										"{{venue_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"601f938834334df1c6ac9df0a71112c5\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "6da5bbdd-3f9e-4282-bc07-3ed1123e3d41"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.227254"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"venues\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/venues/1\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-04-26T19:50:42.213Z\",\n            \"updatedAt\": \"2020-04-26T19:52:48.067Z\",\n            \"name\": \"My New Venue\",\n            \"ageRestriction\": 18,\n            \"capacity\": 400,\n            \"address\": {\n                \"street\": \"123 6th St. N.\",\n                \"street2\": \"#123\",\n                \"city\": \"St. Petersburg\",\n                \"state\": \"FL\",\n                \"zip\": \"33701\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Patch Venue",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/vnd.api+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AUTH_TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{API_URI}}/venues/{{venue_id}}",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"venues",
+								"{{venue_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Patch Venue",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{AUTH_TOKEN}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"venues\",\n\t\t\"id\": 1,\n\t\t\"attributes\": {\n\t\t\t\"name\": \"My New Venue\",\n\t\t\t\"capacity\": 400,\n\t\t\t\"ageRestriction\": 18,\n\t\t\t\"address\": {\n\t\t\t\t\"street\": \"123 6th St. N.\",\n\t\t\t\t\"street2\": \"#123\",\n\t\t\t\t\"city\": \"St. Petersburg\",\n\t\t\t\t\"state\": \"FL\",\n\t\t\t\t\"zip\": \"33701\"\n\t\t\t}\n\t\t}\n\t}\n}"
+								},
+								"url": {
+									"raw": "{{API_URI}}/venues/{{venue_id}}",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"venues",
+										"{{venue_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"601f938834334df1c6ac9df0a71112c5\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "30f13905-8650-41b5-8f77-61b220bb435e"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.214578"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"1\",\n        \"type\": \"venues\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/venues/1\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-04-26T19:50:42.213Z\",\n            \"updatedAt\": \"2020-04-26T19:52:48.067Z\",\n            \"name\": \"My New Venue\",\n            \"ageRestriction\": 18,\n            \"capacity\": 400,\n            \"address\": {\n                \"street\": \"123 6th St. N.\",\n                \"street2\": \"#123\",\n                \"city\": \"St. Petersburg\",\n                \"state\": \"FL\",\n                \"zip\": \"33701\"\n            }\n        }\n    }\n}"
+						}
+					]
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{

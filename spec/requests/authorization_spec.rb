@@ -44,6 +44,12 @@ RSpec.describe 'Authorization:', :type => :request do
     { method: :patch, factory: :published_future_event },
   ]
 
+  it_behaves_like 'an unauthorized response for', VenueResource, [
+    { method: :post },
+    { method: :put, factory: :venue },
+    { method: :patch, factory: :venue },
+  ]
+
   describe 'out of scope requests' do
     context 'for events' do
       before(:all) do
