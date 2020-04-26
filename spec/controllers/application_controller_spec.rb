@@ -26,9 +26,7 @@ RSpec.describe ApplicationController, :type => :controller do
         get action
 
         expect(response.status).to eq(401)
-
-        res_body = JSON(response.body)
-        expect(res_body).to eq({ 'error' => 'Unauthorized' })
+        expect(JSON(response.body)).to eq({ 'error' => 'Unauthorized' })
       end
     end
 
@@ -40,9 +38,7 @@ RSpec.describe ApplicationController, :type => :controller do
         get action
 
         expect(response.status).to eq(401)
-
-        res_body = JSON(response.body)
-        expect(res_body).to eq(
+        expect(JSON(response.body)).to eq(
           {
             'error' => 'Unauthorized',
             'type' => 'JWT::ExpiredSignature',
@@ -60,9 +56,7 @@ RSpec.describe ApplicationController, :type => :controller do
         get action
 
         expect(response.status).to eq(403)
-
-        res_body = JSON(response.body)
-        expect(res_body).to eq(
+        expect(JSON(response.body)).to eq(
           {
             'error' => 'Forbidden',
             'message' => 'You can\'t do this...'
