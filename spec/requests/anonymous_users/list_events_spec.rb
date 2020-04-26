@@ -44,7 +44,6 @@ RSpec.describe 'Event List', :type => :request do
     it 'returns a list of non-deleted, published events by default' do
       get '/events'
 
-      # TODO abstract to: behaves_like 'successful get request'
       expect(response).to have_http_status(:success)
       expect(response.content_type).to eq('application/vnd.api+json')
 

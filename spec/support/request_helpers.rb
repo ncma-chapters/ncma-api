@@ -5,19 +5,21 @@ module RSpec
         _default_headers.clone
       end
 
-      def post(path, body, additional_headers = {})
-        super(
-          path,
-          params: body,
-          headers: headers.merge(additional_headers),
-          as: :json
-        )
+      [:post, :put, :patch].each do |method_name|
+        define_method method_name do |path, body, additional_headers = {}|
+          super(
+            path,
+            params: body,
+            headers: headers.merge(additional_headers),
+            as: :json
+          )
+        end
       end
 
-      [:post].each do |action|
+      [:post, :put, :patch].each do |action|
         define_method :"#{action.to_s}_as" do |role, *args|
           token = _build_token_for(role)
-          post(*args, { Authorization: "Bearer #{token}" })
+          send(action, *args, { Authorization: "Bearer #{token}" })
         end
       end
 
