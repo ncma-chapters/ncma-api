@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Create Event', :type => :request do
+RSpec.describe 'Events (as EventManager)', :type => :request do
   before(:all) do
     @venue = create(:venue)
   end
