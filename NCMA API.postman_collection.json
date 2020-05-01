@@ -1565,6 +1565,258 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "EventRegistrations",
+			"item": [
+				{
+					"name": "Free Event Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"eventRegistrations\",\n\t\t\"attributes\":{\n\t\t\t\"data\": {\n\t\t\t\t\"firstName\": \"Kevin\",\n\t\t\t\t\"lastName\": \"Mircovich\",\n\t\t\t\t\"email\": \"kevin@ncmamonmouth.org\",\n\t\t\t\t\"title\": \"Software Engineer\",\n\t\t\t\t\"company\": \"NCMA Monmouth\"\n\t\t\t}\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"ticketClass\": {\n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"ticketClasses\",\n\t\t\t\t\t\"id\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URI}}/event-registrations",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"event-registrations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Free Event Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"eventRegistrations\",\n\t\t\"attributes\":{\n\t\t\t\"data\": {\n\t\t\t\t\"firstName\": \"Kevin\",\n\t\t\t\t\"lastName\": \"Mircovich\",\n\t\t\t\t\"email\": \"kevin@ncmamonmouth.org\",\n\t\t\t\t\"title\": \"Software Engineer\",\n\t\t\t\t\"company\": \"NCMA Monmouth\"\n\t\t\t}\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"ticketClass\": {\n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"ticketClasses\",\n\t\t\t\t\t\"id\": 1\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URI}}/event-registrations",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"event-registrations"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.api+json"
+								},
+								{
+									"key": "Location",
+									"value": "http://localhost:3000/event-registrations/5"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7bf1c7d76a95a00e36856233c3dcae03\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "01059e49-3999-4002-a10a-bcd1e3b840ed"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.034297"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"5\",\n        \"type\": \"eventRegistrations\",\n        \"links\": {\n            \"self\": \"http://localhost:3000/event-registrations/5\"\n        },\n        \"attributes\": {\n            \"createdAt\": \"2020-05-01T23:09:34.930Z\",\n            \"updatedAt\": \"2020-05-01T23:09:34.930Z\",\n            \"data\": {\n                \"firstName\": \"Kevin\",\n                \"lastName\": \"Mircovich\",\n                \"email\": \"kevin@ncmamonmouth.org\",\n                \"title\": \"Software Engineer\",\n                \"company\": \"NCMA Monmouth\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Paid Event Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/vnd.api+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"data\": {\n\t\t\"type\": \"eventRegistrations\",\n\t\t\"attributes\":{\n\t\t\t\"data\": {\n\t\t\t\t\"firstName\": \"Kevin\",\n\t\t\t\t\"lastName\": \"Mircovich\",\n\t\t\t\t\"email\": \"kevin@ncmamonmouth.org\",\n\t\t\t\t\"title\": \"Software Engineer\",\n\t\t\t\t\"company\": \"NCMA Monmouth\"\n\t\t\t}\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"ticketClass\": {\n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"ticketClasses\",\n\t\t\t\t\t\"id\": 2\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URI}}/event-registrations",
+							"host": [
+								"{{API_URI}}"
+							],
+							"path": [
+								"event-registrations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Paid Event Registration",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"data\": {\n\t\t\"type\": \"eventRegistrations\",\n\t\t\"attributes\":{\n\t\t\t\"data\": {\n\t\t\t\t\"firstName\": \"Kevin\",\n\t\t\t\t\"lastName\": \"Mircovich\",\n\t\t\t\t\"email\": \"kevin@ncmamonmouth.org\",\n\t\t\t\t\"title\": \"Software Engineer\",\n\t\t\t\t\"company\": \"NCMA Monmouth\"\n\t\t\t}\n\t\t},\n\t\t\"relationships\": {\n\t\t\t\"ticketClass\": {\n\t\t\t\t\"data\": {\n\t\t\t\t\t\"type\": \"ticketClasses\",\n\t\t\t\t\t\"id\": 2\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URI}}/event-registrations",
+									"host": [
+										"{{API_URI}}"
+									],
+									"path": [
+										"event-registrations"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache"
+								},
+								{
+									"key": "X-Request-Id",
+									"value": "0304d571-c24a-424e-8a18-9c7d56d09b8c"
+								},
+								{
+									"key": "X-Runtime",
+									"value": "0.595023"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": null,\n        \"type\": \"eventRegistrations\",\n        \"attributes\": {\n            \"id\": null,\n            \"data\": {\n                \"firstName\": \"Kevin\",\n                \"lastName\": \"Mircovich\",\n                \"email\": \"kevin@ncmamonmouth.org\",\n                \"title\": \"Software Engineer\",\n                \"company\": \"NCMA Monmouth\"\n            },\n            \"ticketClassId\": 2,\n            \"createdAt\": null,\n            \"updatedAt\": null\n        }\n    },\n    \"meta\": {\n        \"clientSecret\": \"pi_123abc_secret_123abc\",\n        \"paymentIntent\": {\n            \"id\": \"pi_123xyz\",\n            \"object\": \"payment_intent\",\n            \"status\": \"requires_payment_method\",\n            \"clientSecret\": \"pi_123abc_secret_123abc\",\n            \"amount\": 250000\n        }\n    }\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

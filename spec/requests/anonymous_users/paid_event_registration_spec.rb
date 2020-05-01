@@ -20,7 +20,7 @@ RSpec.describe 'Paid Event Registration', :type => :request do
       data: {
         type: 'eventRegistrations',
         attributes: {
-          data: JSON(build(:event_registration).data)
+          data: build(:event_registration).data
         },
         relationships: {
           ticketClass: {

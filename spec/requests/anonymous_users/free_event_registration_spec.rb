@@ -18,7 +18,7 @@ RSpec.describe 'Free Event Registration', :type => :request do
       data: {
         type: 'eventRegistrations',
         attributes: {
-          data: JSON(build(:event_registration).data)
+          data: build(:event_registration).data
         },
         relationships: {
           ticketClass: {
@@ -30,6 +30,8 @@ RSpec.describe 'Free Event Registration', :type => :request do
         }
       }
     }
+
+    binding.pry
 
     post '/event-registrations', request_body
 
