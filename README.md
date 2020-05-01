@@ -7,6 +7,9 @@ Ruby `2.6.6`
 ### Seeding the DB
 `rails db:seed`
 
+### Required ENV Variables
+See `.env.sample`
+
 ## Testing
 `rspec`
 
