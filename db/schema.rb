@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
 
   create_table "event_registrations", force: :cascade do |t|
     t.json "data", null: false
+    t.string "payment_intent_id"
     t.integer "ticket_class_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
