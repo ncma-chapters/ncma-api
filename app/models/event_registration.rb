@@ -14,11 +14,11 @@ class EventRegistration < ApplicationRecord
                 message: ->(errors) { errors }
               }
 
-  validate :event_is_published, on: :create
-  validate :event_is_upcoming, on: :create
-  validate :event_is_not_canceled, on: :create
-  validate :event_has_capacity, on: :create
-  validate :ticket_class_has_capacity, on: :create
+  validate :event_is_published, :on => :create
+  validate :event_is_upcoming, :on => :create
+  validate :event_is_not_canceled, :on => :create
+  validate :event_has_capacity, :on => :create
+  validate :ticket_class_has_capacity, :on => :create
 
   # If the ticket class is not free, the EventRegistration should not exist without
   # a corresponding :payment_intent_id
