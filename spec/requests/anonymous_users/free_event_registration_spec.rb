@@ -31,8 +31,6 @@ RSpec.describe 'Free Event Registration', :type => :request do
       }
     }
 
-    binding.pry
-
     post '/event-registrations', request_body
 
     expect(response.status).to eq(201)

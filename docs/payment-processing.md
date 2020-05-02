@@ -9,6 +9,8 @@ On the rails api run:
 
 - `rails db:migrate` // run migrations
 
+- `rails db:seed` // seed some data (TicketClass #2 will be a paid one)
+
 - set `STRIPE_SECRET_KEY` in the file `.env`
 
 - `rails s` // start server
