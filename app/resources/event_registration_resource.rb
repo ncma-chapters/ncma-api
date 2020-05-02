@@ -1,7 +1,7 @@
 class EventRegistrationResource < ApplicationResource 
   class << self
     # There is no way to update event registrations on the API layer
-    # but we'll leave this here for good measuer
+    # but we'll leave this here for good measure
     def updatable_fields(context)
       super - [:payment_intent_id]
     end

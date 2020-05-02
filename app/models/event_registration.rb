@@ -14,18 +14,18 @@ class EventRegistration < ApplicationRecord
                 message: ->(errors) { errors }
               }
 
-  # If the ticket class's is not free, the EventRegistration should not exist without
-  # a coorisponding :stripe_payment_intent_id (...and :stripe_charge_id ?)
-  validates   :payment_intent_id,
-              presence: true,
-              # ticket_class presence is required above, so we're relying on that
-              if: -> { errors.empty? && ticket_class && ticket_class.price != 0 }
-
   validate :event_is_published, on: :create
   validate :event_is_upcoming, on: :create
   validate :event_is_not_canceled, on: :create
   validate :event_has_capacity, on: :create
   validate :ticket_class_has_capacity, on: :create
+
+  # If the ticket class is not free, the EventRegistration should not exist without
+  # a corresponding :payment_intent_id
+  validates   :payment_intent_id,
+              presence: true,
+              # ticket_class presence is required above, so we're relying on that
+              if: -> { errors.empty? && ticket_class && ticket_class.price != 0 }
 
   belongs_to :ticket_class
   has_one :event, through: :ticket_class

@@ -1,5 +1,5 @@
 module EventRegistrationValidations
-  # There are consitions where an EventRegistration should not be valid based on the state
+  # There are conditions where an EventRegistration should not be valid based on the state
   # of it's relationships. These are inclided on EventRegistration.
   # 
   # We soft get properties here and rely on the "validates" hooks on the model
