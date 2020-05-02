@@ -1,4 +1,10 @@
 module EventRegistrationValidations
+  # There are conditions where an EventRegistration should not be valid based on the state
+  # of it's relationships. These are inclided on EventRegistration.
+  # 
+  # We soft get properties here and rely on the "validates" hooks on the model
+  # to ensure that ticekt_class and event are present. If they aren't present
+  # we allow the model to have errors from the presense validators.
   def event_is_published
     if event && !event.published?
       errors.add(:base, "Event must be published")

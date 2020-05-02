@@ -27,8 +27,8 @@ RSpec.describe EventRegistration, :type => :model do
         it 'validates the presence of a ticket_class' do
           expect(subject.save).to eq(false)
 
-          expect(subject.errors.messages[:ticket_class][0]).to eq('must exist')
-          expect(subject.errors.details[:ticket_class][0]).to eq({ :error=>:blank })
+          expect(subject.errors.messages[:ticket_class][0]).to eq("can't be blank")
+          expect(subject.errors.details[:ticket_class][0]).to eq({ :error=>:blank, :with=>:true })
         end
 
         it 'validates the capacity of the ticket_class' do
@@ -96,6 +96,8 @@ RSpec.describe EventRegistration, :type => :model do
           subject.ticket_class = create(:ticket_class, event: create(:published_future_event))
           subject.data = data
 
+          expect(subject).to receive(:payment_intent_id).and_return('pi_q23e')
+
           result = subject.save
 
           expect(result).to eq(true)
@@ -108,6 +110,8 @@ RSpec.describe EventRegistration, :type => :model do
 
           subject.ticket_class = create(:ticket_class, event: create(:published_future_event))
           subject.data = data
+
+          expect(subject).to receive(:payment_intent_id).and_return('pi_q23e')
 
           result = subject.save
 

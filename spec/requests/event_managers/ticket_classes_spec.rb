@@ -10,7 +10,7 @@ RSpec.describe 'TicketClasses (as EventManager)', :type => :request do
       @event.destroy
     end
 
-    it 'can create an event' do
+    it 'POST /ticket-classes' do
       new_ticket_class_payload = {
         'data' => {
           'type' => 'ticketClasses',
@@ -18,7 +18,7 @@ RSpec.describe 'TicketClasses (as EventManager)', :type => :request do
             "name" => "GA",
             "description" => "For Everyone",
             "price" => {
-              "value" => 1000
+              "value" => 10_00
             },
             "eventId" => @event.id
           }
@@ -71,7 +71,7 @@ RSpec.describe 'TicketClasses (as EventManager)', :type => :request do
             "name" => "NOT GA",
             "description" => "NOT For Everyone",
             "price" => {
-              "value" => 100000
+              "value" => 1_000_00
             },
             "eventId" => @ticketClass.event_id
           }
@@ -124,7 +124,7 @@ RSpec.describe 'TicketClasses (as EventManager)', :type => :request do
             "name" => "NOT GA",
             "description" => "NOT For Everyone",
             "price" => {
-              "value" => 100000
+              "value" => 1_000_00
             },
             "eventId" => @ticketClass.event_id
           }
