@@ -2,6 +2,8 @@ class Event < ApplicationRecord
   scope :published, -> { where.not(published_at: nil) }
 
   validates :name, presence: true
+  validates :starting_at, presence: true, if: -> { published? }
+  validates :ending_at, presence: true, if: -> { published? }
 
   belongs_to :venue, optional: true
   has_many :ticket_classes
@@ -43,5 +45,9 @@ class Event < ApplicationRecord
 
   def canceled?
     !!canceled_at
+  end
+
+  def single_day_event?(timezone = 'US/Eastern')
+    starting_at&.in_time_zone(timezone).to_date == ending_at.in_time_zone(timezone)&.to_date
   end
 end

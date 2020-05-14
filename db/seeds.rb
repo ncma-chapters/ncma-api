@@ -3,8 +3,9 @@
 
 # Create a venue
 v = Venue.new
+v.name = 'Station House'
 v.address = { street: "260 1st St. S.", street2: "#200", city: "St. Petersburg", state: "FL", zip: 33701 }
-v.save
+v.save!
 
 # Create a published event
 e = Event.new
@@ -14,18 +15,18 @@ e.venue_id = v.id
 e.published_at = DateTime.now
 e.starting_at = DateTime.now + 2.weeks
 e.ending_at = DateTime.now + 2.weeks + 2.hours
-e.save
+e.save!
 
 # Create some TicketClasses for the event
 tc_1 = TicketClass.new
 tc_1.name = "Members"
 tc_1.price = 0
 tc_1.event_id = e.id
-tc_1.save
+tc_1.save!
 
 tc_2 = TicketClass.new
 tc_2.name = "Non Members"
 tc_2.price = 2500
 tc_2.event_id = e.id
-tc_2.save
+tc_2.save!
 

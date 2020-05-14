@@ -14,4 +14,10 @@ class EventRegistrationResource < ApplicationResource
   has_one :ticket_class
   
   attributes  :data
+
+  after_create :send_email_confirmation
+
+  def send_email_confirmation
+    EventRegistrationMailer.with(event_registration: @model).confirmation_email.deliver_now
+  end
 end

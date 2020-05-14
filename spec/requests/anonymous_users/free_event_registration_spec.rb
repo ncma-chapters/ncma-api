@@ -31,6 +31,19 @@ RSpec.describe 'Free Event Registration', :type => :request do
       }
     }
 
+    event_registration_mailer = double
+    confirmation_email = double
+
+    expect(confirmation_email).to receive(:deliver_now)
+
+    expect(EventRegistrationMailer).to receive(:with).with(
+      event_registration: instance_of(EventRegistration)
+    ).and_return(
+      event_registration_mailer
+    )
+
+    expect(event_registration_mailer).to receive(:confirmation_email).and_return(confirmation_email)
+
     post '/event-registrations', request_body
 
     expect(response.status).to eq(201)

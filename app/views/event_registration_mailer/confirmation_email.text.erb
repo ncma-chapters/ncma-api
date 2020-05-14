@@ -1,0 +1,22 @@
+Dear <%= @display[:recipient][:first_name] %>,
+
+Congratulations, you have successfully registered for <%= @event.name %>. We look forward to seeing you! Here are some details about the event:
+
+<%= @event.name %>
+Date: <%= @display[:event][:date] %>
+Time: <%= @display[:event][:time] %>
+<%= "Address: " + @display[:venue][:address] if @display[:venue][:address] %>
+
+NCMA events are great ways for contract managers to turbocharge their careers. This is where you’ll hear some of the latest thought leadership in our field, as well as network with other contract managers from around the region.
+
+Now that you’ve reserved your spot, we would love it if you helped spread the word over social media. Please use the hashtag #NCMAMonmouth.
+
+If you have any questions, just reply to this email and someone will respond as soon as possible.
+
+We’ll see you in soon!
+
+Best regards,
+
+Joshua Cohen
+Acting President
+NCMA Monmouth Chapter

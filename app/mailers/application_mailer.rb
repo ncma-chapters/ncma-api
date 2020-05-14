@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  TIME_ZONE = 'US/Eastern'
+
   layout 'mailer'
 end

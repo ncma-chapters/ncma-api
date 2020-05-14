@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :event_registration do
     data { JSON({ firstName: 'Kevin', lastName: 'Mircovich', email: 'kevin@ncmamonmouth.org', title: 'Software Engineer', company: 'NCMA Monmouth' }) }
-    ticket_class { nil }
+    ticket_class { create(:ticket_class, price: 0) }
 
     before(:create) do |event_registration|
       if event_registration&.ticket_class&.price > 0

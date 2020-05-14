@@ -48,4 +48,12 @@ Rails.application.configure do
 
   # AuthenticationUtils will verify auth tokens with this secret when env is set to "test".
   config.jwt_secret = 'secret'
+
+  # Action Mailer
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {
+    from: 'NCMA Monmouth Events <events@ncmamonmouth.org>',
+    reply_to: 'NCMA Monmouth <info@ncmamonmouth.org>'
+  }
 end
