@@ -3,6 +3,7 @@ class EventRegistrationMailerPreview < ActionMailer::Preview
   def confirmation_email
     event = FactoryBot.create(
       :published_future_event_with_ticket_classes,
+      name: 'Luncheon',
       starting_at: DateTime.now + 1.day,
       ending_at: DateTime.now + 1.day + 2.hours,
       venue: FactoryBot.create(
