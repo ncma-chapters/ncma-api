@@ -7,7 +7,7 @@ RSpec.describe 'TicketClasses (as EventManager)', :type => :request do
     end
 
     after(:all) do
-      @event.destroy
+      @event.destroy!
     end
 
     it 'POST /ticket-classes' do
@@ -59,7 +59,9 @@ RSpec.describe 'TicketClasses (as EventManager)', :type => :request do
     end
 
     after(:all) do
-      @ticketClass.destroy
+      @ticketClass.destroy!
+      @ticketClass.try(:event)&.destroy!
+      @ticketClass.try(:event).try(:venue)&.destroy!
     end
 
     it 'can PUT an event' do

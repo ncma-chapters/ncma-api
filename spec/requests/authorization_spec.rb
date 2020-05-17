@@ -13,7 +13,9 @@ RSpec.describe 'Authorization:', :type => :request do
         end
 
         after(:all) do
-          @model&.destroy
+          @model&.destroy!
+          @model.try(:event).try(:venue)&.destroy!
+          @model.try(:event)&.destroy!
         end
 
         it 'responds with 403 status' do
@@ -64,7 +66,7 @@ RSpec.describe 'Authorization:', :type => :request do
       end
 
       after(:all) do
-        @model.destroy
+        @model.destroy!
       end
 
       context 'on put' do 
