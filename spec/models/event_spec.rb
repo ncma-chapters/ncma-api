@@ -10,6 +10,7 @@ RSpec.describe Event, :type => :model do
       # Save an event
       subject.name = 'My Event'
       subject.starting_at = DateTime.now + 30
+      subject.ending_at = DateTime.now + 60
       subject.published_at = DateTime.now - 1
 
       subject.save!
