@@ -4,6 +4,8 @@ class TicketClass < ApplicationRecord
   belongs_to :event
   has_many :event_registrations
 
+  validates :name, presence: true
+
   def remaining_capacity
     return nil if !event
     return event.remaining_capacity if capacity.blank?
