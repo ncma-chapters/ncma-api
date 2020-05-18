@@ -21,8 +21,7 @@ class Venue < ApplicationRecord
         street2: { type: 'string', maxLength: 50 },
         city: { type: 'string', maxLength: 100 },
         state: { type: 'string', enum: state_codes },
-        zip: { type: 'string', minLength: 5, maxLength: 10 },
-        postalCode: {
+        zip: {
           type: 'string',
           anyOf: [
             { pattern: "^\\d{5}$" },
