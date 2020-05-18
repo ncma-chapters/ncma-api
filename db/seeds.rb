@@ -4,7 +4,7 @@
 # Create a venue
 v = Venue.new
 v.name = 'Station House'
-v.address = { street: "260 1st St. S.", street2: "#200", city: "St. Petersburg", state: "FL", zip: 33701 }
+v.address = { street: '260 1st St. S.', street2: '#200', city: 'St. Petersburg', state: 'FL', zip: '33701' }
 v.save!
 
 # Create a published event

@@ -12,10 +12,13 @@
 
 ActiveRecord::Schema.define(version: 2020_03_21_052402) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "event_registrations", force: :cascade do |t|
     t.json "data", null: false
     t.string "payment_intent_id"
-    t.integer "ticket_class_id", null: false
+    t.bigint "ticket_class_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -23,14 +26,14 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
     t.integer "capacity", default: 200
     t.datetime "published_at"
     t.datetime "starting_at"
     t.datetime "ending_at"
     t.datetime "canceled_at"
-    t.integer "venue_id"
+    t.bigint "venue_id"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
   end
 
   create_table "ticket_classes", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
@@ -48,8 +51,7 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
     t.integer "capacity"
     t.datetime "sales_start"
     t.datetime "sales_end"
-    t.string "order_confirmation_message"
-    t.integer "event_id", null: false
+    t.bigint "event_id", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -58,10 +60,10 @@ ActiveRecord::Schema.define(version: 2020_03_21_052402) do
   end
 
   create_table "venues", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "age_restriction"
     t.integer "capacity"
-    t.json "address"
+    t.json "address", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
