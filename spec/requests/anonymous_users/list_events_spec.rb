@@ -163,7 +163,7 @@ RSpec.describe 'Event List', :type => :request do
       expect(venue1['attributes']['updatedAt']).to be_present
       expect(venue1['attributes']['ageRestriction']).to eq(nil)
       expect(venue1['attributes']['capacity']).to eq(nil)
-      expect(venue1['attributes']['address']).to eq(nil)
+      expect(venue1['attributes']['address']).to eq(expected_event_2.venue.address)
 
       expect(ticketClass1['id'].to_i).to eq(expected_event_3.ticket_classes[0].id)
       expect(ticketClass1['attributes']['name']).to eq(expected_event_3.ticket_classes[0].name)
@@ -176,7 +176,6 @@ RSpec.describe 'Event List', :type => :request do
       expect(ticketClass1['attributes']['capacity']).to eq(expected_event_3.ticket_classes[0].capacity)
       expect(ticketClass1['attributes']['salesStart']).to eq(expected_event_3.ticket_classes[0].sales_start)
       expect(ticketClass1['attributes']['salesEnd']).to eq(expected_event_3.ticket_classes[0].sales_end)
-      expect(ticketClass1['attributes']['orderConfirmationMessage']).to eq(expected_event_3.ticket_classes[0].order_confirmation_message)
 
       expect(ticketClass2['id'].to_i).to eq(expected_event_3.ticket_classes[1].id)
       expect(ticketClass2['attributes']['name']).to eq(expected_event_3.ticket_classes[1].name)
@@ -189,7 +188,6 @@ RSpec.describe 'Event List', :type => :request do
       expect(ticketClass2['attributes']['capacity']).to eq(expected_event_3.ticket_classes[1].capacity)
       expect(ticketClass2['attributes']['salesStart']).to eq(expected_event_3.ticket_classes[1].sales_start)
       expect(ticketClass2['attributes']['salesEnd']).to eq(expected_event_3.ticket_classes[1].sales_end)
-      expect(ticketClass2['attributes']['orderConfirmationMessage']).to eq(expected_event_3.ticket_classes[1].order_confirmation_message)
     end
   end
 end

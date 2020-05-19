@@ -52,7 +52,6 @@ RSpec.describe 'List Ticket Classes', :type => :request do
       expect(ticketClass1['attributes']['capacity']).to eq(event.ticket_classes[0].capacity)
       expect(ticketClass1['attributes']['salesStart']).to eq(event.ticket_classes[0].sales_start)
       expect(ticketClass1['attributes']['salesEnd']).to eq(event.ticket_classes[0].sales_end)
-      expect(ticketClass1['attributes']['orderConfirmationMessage']).to eq(event.ticket_classes[0].order_confirmation_message)
 
       expect(ticketClass2['id'].to_i).to eq(event.ticket_classes[1].id)
       expect(ticketClass2['attributes']['name']).to eq(event.ticket_classes[1].name)
@@ -65,7 +64,6 @@ RSpec.describe 'List Ticket Classes', :type => :request do
       expect(ticketClass2['attributes']['capacity']).to eq(event.ticket_classes[1].capacity)
       expect(ticketClass2['attributes']['salesStart']).to eq(event.ticket_classes[1].sales_start)
       expect(ticketClass2['attributes']['salesEnd']).to eq(event.ticket_classes[1].sales_end)
-      expect(ticketClass2['attributes']['orderConfirmationMessage']).to eq(event.ticket_classes[1].order_confirmation_message)
     end
   end
 end

@@ -8,7 +8,6 @@ class TicketClassResource < ApplicationResource
               :capacity,
               :sales_start,
               :sales_end,
-              :order_confirmation_message,
               :event_id
 
   attribute :price, format: :currency

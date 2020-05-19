@@ -16,17 +16,18 @@ class Event < ApplicationRecord
   def registration_schema
     {
       type: 'object',
-      required: %w[firstName lastName email],
+      required: %w(firstName lastName email),
       additionalProperties: false,
       properties: {
-        firstName: { type: 'string' },
-        lastName: { type: 'string' },
+        firstName: { type: 'string', maxLength: 50 },
+        lastName: { type: 'string', maxLength: 50 },
         email: {
           type: 'string',
+          maxLength: 100,
           pattern: '^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$',
         },
-        title: { type: 'string' },
-        company: { type: 'string' },
+        title: { type: 'string', maxLength: 100 },
+        company: { type: 'string', maxLength: 100 },
       }
     }.to_json
   end
