@@ -4,6 +4,8 @@ phases:
   install:
     commands:
       - echo Build started on `date`
+      - \curl -sSL https://get.rvm.io | bash -s stable --ruby
+      - rvm install 2.6.6
       - ruby -v
       - bundle install
   pre_build:
