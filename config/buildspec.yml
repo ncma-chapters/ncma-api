@@ -1,0 +1,13 @@
+version: 0.2
+
+phases:
+  start:
+    commands:
+      - echo Build started on `date`
+      - ruby -v
+  install:
+    commands:
+      - bundle install
+  test:
+    commands:
+      - rspec
