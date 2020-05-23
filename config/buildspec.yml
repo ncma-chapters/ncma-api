@@ -19,4 +19,5 @@ phases:
       - bundle install --without development test
       - bundle package
 artifacts:
-  name: ncma-api-$(date +%Y-%m-%dT%H:%M:%S_`echo CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7`)
+  files: '**/*'
+  name: ncma-api_$(date +%Y-%m-%dT%H:%M:%S_`echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7`)
