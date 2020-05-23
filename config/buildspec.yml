@@ -8,16 +8,10 @@ phases:
   install:
     runtime-versions:
       ruby: 2.6
-    commands:
-      - echo ruby -v
   pre_build:
     commands:
-      - echo -- Build started on `date`
       - bundle install --deployment
       - rspec
   build:
     commands:
       - bundle package
-  pre_build:
-    commands:
-      - echo -- Build completed at `date`
