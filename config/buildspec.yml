@@ -1,17 +1,28 @@
 version: 0.2
 
+env:
+  variables:
+    STRIPE_SECRET_KEY: stripe_key_stub
+
 phases:
   install:
+    runtime-versions:
+      ruby: 2.6
     commands:
-      - echo Build started on `date`
-      - sudo apt-get install software-properties-common
-      - sudo apt-add-repository -y ppa:rael-gc/rvm
-      - sudo apt-get update
-      - sudo apt-get install rvm
-      - echo 'source "/etc/profile.d/rvm.sh"' >> ~/.bashrc
-      - rvm install 2.6.6
-      - ruby -v
-      - bundle install
+      - echo ruby -v
   pre_build:
     commands:
+      - echo -- Build started on `date`
+      - bundle install --deployment
       - rspec
+  build:
+    commands:
+      - bundle package
+  pre_build:
+    commands:
+      - echo -- Build completed at `date`
+
+artifacts:
+  files:
+    - '**/*'
+  name: ncma-api-$(date +%Y-%m-%dT%H:%M:%S_`cat .git/refs/heads/master | cut -c1-7`)
