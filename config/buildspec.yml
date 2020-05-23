@@ -8,15 +8,12 @@ phases:
   install:
     commands:
       - # gem install bundler
-      - bundle install # --deployment
+      - bundle install
   pre_build:
     commands:
       - bundle exec rspec
+      - rm logs/test.log
+      - rm -rf tmp/cache
 artifacts:
   files: '**/*'
   name: ncma-api_$(date +%Y-%m-%dT%H:%M:%S_`echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7`)
-
-# TODO:
-# - make sure ruby isn't installed in vendor/bundle if it's not really needed?
-# - why are gem's source code cached in vendor/cache
-# - think we need to generate a rails secret for prod (and likely lower envs too)
