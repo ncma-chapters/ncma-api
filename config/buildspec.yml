@@ -1,9 +1,5 @@
 version: 0.2
 
-env:
-  variables:
-    STRIPE_SECRET_KEY: stripe_key_stub
-
 phases:
   install:
     commands:
@@ -17,4 +13,4 @@ phases:
       - rm log/test.log && rm -rf tmp/cache
 artifacts:
   files: '**/*'
-  name: ncma-api_$(date +%Y-%m-%dT%H:%M:%S_`echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7`)
+  name: ncma-api_$(date +%Y-%m-%dT%H:%M:%S_`echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c1-7`).zip
