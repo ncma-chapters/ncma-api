@@ -8,6 +8,8 @@ phases:
   install:
     runtime-versions:
       ruby: 2.6
+    commands:
+      - rbenv install 2.6.6
   pre_build:
     commands:
       - bundle install --deployment
