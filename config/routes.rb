@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: redirect('/events')
 
+  resources :health, only: [:index]
+
   # TODO: add spec to verifiy routes don't get leaked
   jsonapi_resources :venues, only: [:create, :update] do
   end
