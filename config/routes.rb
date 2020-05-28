@@ -18,4 +18,6 @@ Rails.application.routes.draw do
 
   jsonapi_resources :event_registrations, only: [:create] do
   end
+
+  post '/hooks/stripe' => 'hooks#stripe'
 end

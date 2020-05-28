@@ -66,7 +66,7 @@ class EventRegistration < ApplicationRecord
 
   def payment_intent
     raise nil if payment_intent_id.nil?
-    @payment_intent ||= Stripe::PaymentIntent.retreive(payment_intent_id)
+    @payment_intent ||= Stripe::PaymentIntent.retrieve(payment_intent_id)
   end
 
   def only_requires_payment?
