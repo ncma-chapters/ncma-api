@@ -59,4 +59,77 @@ RSpec.describe 'Paid Event Registration', :type => :request do
     expect(res_body['meta']['paymentIntent']['clientSecret']).to eq('<PAYMENT_INTENT_CLIENT_SECRET>')
     expect(res_body['meta']['paymentIntent']['amount']).to eq(1_500_00)
   end
+
+  it 'can complete the registration' do
+    headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'HTTP_STRIPE_SIGNATURE': '__MY_STRIPE_SIGNATURE'
+    }
+
+    request_body = { data: '__REQUEST_BODY' }
+
+    payment_intent = double(
+      'Stripe::PaymentIntent',
+      id: 'pi_1234567890',
+      metadata: {
+        'registration.data' => {
+          firstName: 'Kevin',
+          lastName: 'Mircovich',
+          email: 'kevin@ncmamonmouth.org',
+          company: 'NCMA Monmouth',
+          title: 'Organizer'
+        },
+        'ticket_class_id' => @ticket_class.id,
+        'First Name' => 'Kevin',
+        'Last Name' => 'Mircovich',
+        'Email' => 'kevin@ncmamonmouth.org',
+      }
+    )
+
+    event = double(
+      type: 'payment_intent.succeeded',
+      data: double(
+        object: payment_intent
+      )
+    )
+
+    stub_const("HooksController::STRIPE_WEBHOOK_SIGNING_SECRET", '__MY_STRIPE_WEBHOOK_SECRET')
+
+    expect(Stripe::Webhook).to receive(:construct_event).with(
+      JSON(request_body),
+      '__MY_STRIPE_SIGNATURE',
+      '__MY_STRIPE_WEBHOOK_SECRET'
+    ).and_return(event)
+
+    event_registration_mailer = double
+    confirmation_email = double
+
+    expect(confirmation_email).to receive(:deliver_now)
+
+    expect(EventRegistrationMailer).to receive(:with).with(
+      event_registration: instance_of(EventRegistration)
+    ).and_return(
+      event_registration_mailer
+    )
+
+    expect(event_registration_mailer).to receive(:confirmation_email).and_return(confirmation_email)
+
+    post '/hooks/stripe', request_body, headers
+
+    expect(response.status).to eq(201)
+
+    res_body = JSON(response.body)
+
+    expect(res_body['data']).to be_present
+    expect(res_body['data']['created_at']).to be_present
+    expect(res_body['data']['updated_at']).to be_present
+    expect(res_body['data']['ticket_class_id']).to eq @ticket_class.id
+    expect(res_body['data']['payment_intent_id']).to eq 'pi_1234567890'
+    expect(res_body['data']['data']['firstName']).to eq 'Kevin'
+    expect(res_body['data']['data']['lastName']).to eq 'Mircovich'
+    expect(res_body['data']['data']['email']).to eq 'kevin@ncmamonmouth.org'
+    expect(res_body['data']['data']['title']).to eq 'Organizer'
+    expect(res_body['data']['data']['company']).to eq 'NCMA Monmouth'
+  end
 end

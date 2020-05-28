@@ -26,6 +26,8 @@ class EventRegistrationsController < ApplicationController
     end
   end
 
+  private
+
   def render_pending_registration(registration)
     payment_intent = registration.payment_intent
 
@@ -53,8 +55,6 @@ class EventRegistrationsController < ApplicationController
       }
     }, status: 202
   end
-
-  private
 
   def attributes
     { data: params__data, ticket_class_id: params__ticket_class_id }
