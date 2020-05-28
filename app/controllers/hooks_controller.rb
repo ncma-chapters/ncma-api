@@ -1,32 +1,29 @@
 class HooksController < ActionController::API
+  STRIPE_WEBHOOK_SIGNING_SECRET = ENV['STRIPE_WEBHOOK_SIGNING_SECRET']
+
   def stripe
+    signature_header = request.env['HTTP_STRIPE_SIGNATURE']
     payload = request.body.read
+
     event = nil
 
     begin
-      event = Stripe::Event.construct_from(
-        # TODO: pass headers['HTTP_STRIPE_SIGNATURE'] to #construct_from
-        # implementation: https://stripe.com/docs/webhooks/signatures
-        JSON.parse(payload, symbolize_names: true)
-      )
+      event = Stripe::Webhook.construct_event(payload, signature_header, STRIPE_WEBHOOK_SIGNING_SECRET)
     rescue JSON::ParserError => e
       render json: { error: 'JSON::ParserError' }, status: :bad_request
       return
     rescue Stripe::SignatureVerificationError => e
-      # Invalid signature. For more details visit: https://stripe.com/docs/webhooks/signatures
+      # For more details visit: https://stripe.com/docs/webhooks/signatures
       render json: { error: 'Stripe::SignatureVerificationError' }, status: :bad_request
       return
     end
 
     if event.type == 'payment_intent.succeeded'
-      target_payment_intent = event.data.object # Stripe::PaymentIntent
+      payment_intent = event.data.object # Stripe::PaymentIntent
 
-      # Fetch the payment intent to ensure it exists in stripe
-      payment_intent = Stripe::PaymentIntent.retrieve(target_payment_intent.id)
-
-      # Create an EventRegistration after merging the metadata stored on the payment intent
+      # Create an EventRegistration after merging the metadata stored on the Stripe::PaymentIntent
       registration = EventRegistration.create!(
-        data: payment_intent.metadata['registration.data'].to_json,
+        data: payment_intent.metadata['registration.data'],
         payment_intent_id: payment_intent.id,
         ticket_class_id: payment_intent.metadata['ticket_class_id'],
       )
