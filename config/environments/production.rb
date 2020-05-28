@@ -109,7 +109,9 @@ Rails.application.configure do
     domain: 'smtp.ncmamonmouth.org',
     user_name: ENV['SMTP_USERNAME'],
     password: ENV['SMTP_PASSWORD'],
-    authentication: :login,
+    authentication: :plain,
+    enable_starttls_auto: true,
+    port: 587
   }
 
   config.action_mailer.default_options = {

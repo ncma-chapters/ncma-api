@@ -45,7 +45,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Action Mailer
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -56,7 +56,9 @@ Rails.application.configure do
     domain: 'smtp.ncmamonmouth.org',
     user_name: ENV['SMTP_USERNAME'],
     password: ENV['SMTP_PASSWORD'],
-    authentication: :login,
+    authentication: :plain,
+    enable_starttls_auto: true,
+    port: 587
   }
 
   config.action_mailer.default_options = {
