@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     # Remove block to allow nested routes (i.e. /events/:id/venue)
     jsonapi_resources :ticket_classes, only: [:index, :show] do
     end
+
+    jsonapi_resources :event_registrations, only: [:index] do
+    end
   end
 
   jsonapi_resources :ticket_classes, only: [:create, :update] do
