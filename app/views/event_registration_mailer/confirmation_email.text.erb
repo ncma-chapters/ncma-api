@@ -1,11 +1,18 @@
 Dear <%= @display[:recipient][:first_name] %>,
 
-Congratulations, you have successfully registered for the NCMA Monmouth event, <%= @event.name %>. We look forward to seeing you! Here are some details about the event:
+Congratulations, you've successfully registered for the NCMA Monmouth event, <%= @event.name %>. We look forward to seeing you!
 
-<%= @event.name %>
+Here are some details about the event:
+
+Name: <%= @event.name %>
 Date: <%= @display[:event][:date] %>
 Time: <%= @display[:event][:time] %>
 <%= "Address: " + @display[:venue][:address] if @display[:venue][:address] %>
+
+Here are the details about your ticket:
+
+Ticket: <%= @display[:ticket][:name] %>
+Ticket Price: <%= @display[:ticket][:price] %>
 
 NCMA events are great ways for contract managers to turbocharge their careers. This is where you’ll hear some of the latest thought leadership in our field, as well as network with other contract managers from around the region.
 

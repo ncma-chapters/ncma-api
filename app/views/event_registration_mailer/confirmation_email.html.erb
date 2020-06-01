@@ -1,15 +1,15 @@
 <p>Dear <%= @display[:recipient][:first_name] %>,</p>
 <p>
-  Congratulations, you have successfully registered for the NCMA Monmouth event, <strong><%= @event.name %></strong>. We look forward to seeing you! Here are some details about the event:
+  Congratulations, you've successfully registered for the NCMA Monmouth event, <strong><%= @event.name %></strong>. We look forward to seeing you!
 </p>
 
-<p style="margin-bottom: 0.5em; padding-left: 2px">
-  <strong>
-    <%= @event.name %>
-  </strong>
-</p>
+<p>Here are some details about the event:</p>
 
 <table>
+  <tr>
+    <td><strong>Name:</strong></td>
+    <td><%= @event.name %></td>
+  </tr>
   <tr>
     <td><strong>Date:</strong></td>
     <td><%= @display[:event][:date] %></td>
@@ -24,6 +24,19 @@
     <td><%= @display[:venue][:address] %></td>
   </tr>
   <% end %>
+</table>
+
+<p>Here are the details about your ticket:</p>
+
+<table>
+  <tr>
+    <td><strong>Ticket:</strong></td>
+    <td><%= @display[:ticket][:name] %></td>
+  </tr>
+  <tr>
+    <td><strong>Ticket Price:</strong></td>
+    <td><%= @display[:ticket][:price] %></td>
+  </tr>
 </table>
 
 <p>
