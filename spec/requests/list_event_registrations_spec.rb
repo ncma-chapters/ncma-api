@@ -15,16 +15,45 @@ RSpec.describe 'List Event Registrations', :type => :request do
       ticket_class_id = @ticket_classes[index % 2].id
       create(:event_registration, data: data, ticket_class_id: ticket_class_id)
     end
+
+    ENV['ATTENDEE_LIST_PASSCODE'] = 'goodpasscode'
   end
 
   after(:all) do
     @event_registrations.each(&:destroy!)
     @ticket_classes.each(&:destroy!)
     @event.destroy!
+
+    ENV['ATTENDEE_LIST_PASSCODE'] = nil
+  end
+
+  it 'requires a passcode' do
+    get "/events/#{@event.id}/event-registrations?include=ticketClass"
+    expect(response.status).to eq 400
+
+    res_body = JSON.parse response.body
+
+    expect(res_body['errors']).to be_present
+    expect(res_body['errors'].size).to eq 1
+    expect(res_body['errors'][0]['title']).to eq 'Missing Parameter'
+    expect(res_body['errors'][0]['detail']).to eq 'The required parameter, passcode, is missing.'
+    expect(res_body['errors'][0]['code']).to eq '106'
+    expect(res_body['errors'][0]['status']).to eq '400'
+  end
+
+  it 'requires a valid passcode' do
+    get "/events/#{@event.id}/event-registrations?include=ticketClass&passcode=badpasscode"
+
+    expect(response.status).to eq 403
+
+    res_body = JSON.parse response.body
+
+    expect(res_body['error']).to eq 'Forbidden'
+    expect(res_body['message']).to eq 'Not authorized to view Event Registrations'
   end
 
   it 'can list attedees' do
-    get "/events/#{@event.id}/event-registrations?include=ticketClass"
+    get "/events/#{@event.id}/event-registrations?include=ticketClass&passcode=goodpasscode"
 
     expect(response.status).to eq 200
 
