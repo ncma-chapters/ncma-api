@@ -3,6 +3,7 @@ class EventRegistrationMailer < ApplicationMailer
     subject = 'Confirmed! You\'re on the list'
 
     @event_registration = params[:event_registration]
+    @ticket = @event_registration.ticket_class
     
     raise 'Event Registration not valid' unless @event_registration.valid?
 
@@ -18,6 +19,10 @@ class EventRegistrationMailer < ApplicationMailer
       },
       venue: {
         address: address_display(@event.venue)
+      },
+      ticket: {
+        name: @ticket.name,
+        price: @ticket.price.format
       }
     }
 
